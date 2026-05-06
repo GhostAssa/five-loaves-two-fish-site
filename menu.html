@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | Five Loaves & Two Fish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Five Loaves & Two Fish logo" />
+      <span>Five Loaves & Two Fish</span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html" class="active">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="about.html">About</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero page-menu">
+      <div>
+        <span class="eyebrow">Menu</span>
+        <h1>Fresh Nigerian dishes made for campus cravings.</h1>
+        <p>Browse dishes, soups, proteins, and extras crafted for every appetite.</p>
+      </div>
+      <a class="btn btn-primary" href="order.html">Place an Order</a>
+    </section>
+
+    <section class="menu-section">
+      <div class="section-header">
+        <span class="eyebrow">Dishes</span>
+        <h2>Campus favorites from our kitchen</h2>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="White ricee.jfif" alt="Exclusive White Rice" />
+          </div>
+          <h3>Exclusive White Rice</h3>
+          <p>Perfectly steamed white rice with choice of stew or sauce.</p>
+          <strong>₦250</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Exclusive White Rice', 250)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="swallow meal o.jpg" alt="Swallow" />
+          </div>
+          <h3>Swallow</h3>
+          <p>Choose from amala, fufu, eba, or semo.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openSwallowSelector()">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="jollof meal o.jpg" alt="Exclusive Jollof Rice" />
+          </div>
+          <h3>Exclusive Jollof Rice</h3>
+          <p>Rich tomato rice with spices and a savory finish.</p>
+          <strong>₦250</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Exclusive Jollof Rice', 250)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="Fried rice.jfif" alt="Exclusive Fried Rice" />
+          </div>
+          <h3>Exclusive Fried Rice</h3>
+          <p>Fluffy fried rice with mixed vegetables and seasoning.</p>
+          <strong>₦250</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Exclusive Fried Rice', 250)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="stir fry spag.jpg" alt="Stir Fry Spag" />
+          </div>
+          <h3>Stir Fry Spag</h3>
+          <p>Spicy stir fried spaghetti cooked with rich seasoning.</p>
+          <strong>₦250</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Stir Fry Spag', 250)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="noodles meal.jpg" alt="Special Noodles" />
+          </div>
+          <h3>Special Noodles</h3>
+          <p>Signature noodles cooked with vegetables and choice meat.</p>
+          <strong>₦1,500</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Special Noodles', 1500)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="moi moi.jpg" alt="Hot Moi Moi" />
+          </div>
+          <h3>Hot Moi Moi</h3>
+          <p>Steamed bean pudding served warm and rich.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Hot Moi Moi', 200)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="coleslaw.jfif" alt="Coleslaw" />
+          </div>
+          <h3>Coleslaw</h3>
+          <p>Fresh and creamy coleslaw side to complement your meal.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Coleslaw', 200)">Add to Order</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="menu-section warm-bg">
+      <div class="section-header">
+        <span class="eyebrow">Soup</span>
+        <h2>Traditional soups for every taste</h2>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-item">
+          <h3>Ewedu</h3>
+          <p>Traditional leafy soup to enjoy with swallow.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Ewedu Soup', 0)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <h3>Gbegiri</h3>
+          <p>Bean soup served with a rich, smooth texture.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Gbegiri Soup', 0)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <h3>Abula</h3>
+          <p>Combination of ewedu and gbegiri for bold flavor.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Abula Soup', 0)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <h3>Egusi</h3>
+          <p>Melon seed soup with leafy greens and assorted protein.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Egusi Soup', 0)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <h3>Efo Riro</h3>
+          <p>Vegetable soup cooked in rich palm oil sauce.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Efo Riro (Vegetable Soup)', 0)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <h3>Okra</h3>
+          <p>Okra soup with chopped vegetables and savory broth.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Okra Soup', 0)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <h3>Stew</h3>
+          <p>Classic red stew perfect with rice or swallow.</p>
+          <strong>Ask for price</strong>
+          <button class="add-to-order-btn" onclick="addToCart('Stew', 0)">Add to Order</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="menu-section">
+      <div class="section-header">
+        <span class="eyebrow">Proteins</span>
+        <h2>Rich protein options for your plate</h2>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="boiled egg.jpg" alt="Egg" />
+          </div>
+          <h3>Egg</h3>
+          <p>Soft cooked egg added to any dish or soup.</p>
+          <strong>₦250</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Egg', 250)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="beef.jpg" alt="Beef" />
+          </div>
+          <h3>Beef</h3>
+          <p>Tender beef pieces for rice or soup.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Beef', 200)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="fish big.jpg" alt="Fish" />
+          </div>
+          <h3>Fish</h3>
+          <p>Fresh fish priced per serving size.</p>
+          <strong>₦200, ₦300, ₦400 & ₦500</strong>
+          <button class="add-to-order-btn" onclick="openFishSelector()">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="chicken.jpg" alt="Chicken" />
+          </div>
+          <h3>Chicken</h3>
+          <p>Choice chicken portions at multiple price points.</p>
+          <strong>₦500, ₦700, ₦1,000 & ₦1,200</strong>
+          <button class="add-to-order-btn" onclick="openChickenSelector()">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="goat meat.jpg" alt="Goat Meat" />
+          </div>
+          <h3>Goat Meat</h3>
+          <p>Hearty goat meat for a spicy, savory bite.</p>
+          <strong>₦500</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Goat Meat', 500)">Add to Order</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="menu-section warm-bg">
+      <div class="section-header">
+        <span class="eyebrow">Also Available</span>
+        <h2>Popular add-ons</h2>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="ponmo.jfif" alt="Ponmo" />
+          </div>
+          <h3>Ponmo</h3>
+          <p>Crispy cow skin add-on for your favorite meal.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Ponmo', 200)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="plantain.jpg" alt="Plantain" />
+          </div>
+          <h3>Plantain</h3>
+          <p>Sweet fried plantain side to complement any dish.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Plantain', 200)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="assorted.jpg" alt="Assorted" />
+          </div>
+          <h3>Assorted</h3>
+          <p>Assorted extras and side servings to complete your meal.</p>
+          <strong>₦500</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Assorted', 500)">Add to Order</button>
+        </article>
+      </div>
+    </section>
+
+    <div class="hero-actions center">
+      <a class="btn btn-primary" href="order.html">Build Your Order</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  </footer>
+
+  <div id="quantityModal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2 id="quantityModalTitle">Select Quantity</h2>
+        <button class="close-btn" onclick="closeQuantitySelector()">✕</button>
+      </div>
+      <div class="variant-quantity">
+        <label for="itemQty">Quantity</label>
+        <div class="qty-input-group">
+          <button type="button" class="qty-btn" onclick="decrementItemQty()">−</button>
+          <input type="number" id="itemQty" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementItemQty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addSelectedItemToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closeQuantitySelector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quantityOverlay" class="variant-overlay" onclick="closeQuantitySelector()"></div>
+
+  <div id="swallowModal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Select Swallow Type</h2>
+        <button class="close-btn" onclick="closeSwallowSelector()">✕</button>
+      </div>
+      <div class="variant-options">
+        <label class="variant-option">
+          <input type="radio" name="swallowType" value="Amala" checked />
+          <span>Amala</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="swallowType" value="Fufu" />
+          <span>Fufu</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="swallowType" value="Eba" />
+          <span>Eba</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="swallowType" value="Semo" />
+          <span>Semo</span>
+        </label>
+      </div>
+      <div class="variant-quantity">
+        <label for="swallowQty">Quantity</label>
+        <div class="qty-input-group">
+          <button type="button" class="qty-btn" onclick="decrementSwallowQty()">−</button>
+          <input type="number" id="swallowQty" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementSwallowQty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addSwallowToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closeSwallowSelector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="swallowOverlay" class="variant-overlay" onclick="closeSwallowSelector()"></div>
+
+  <div id="fishModal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Select Fish Size & Price</h2>
+        <button class="close-btn" onclick="closeFishSelector()">✕</button>
+      </div>
+      <div class="variant-options">
+        <label class="variant-option">
+          <input type="radio" name="fishPrice" value="200" checked />
+          <span>Small - ₦200</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="fishPrice" value="300" />
+          <span>Medium - ₦300</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="fishPrice" value="400" />
+          <span>Large - ₦400</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="fishPrice" value="500" />
+          <span>Extra Large - ₦500</span>
+        </label>
+      </div>
+      <div class="variant-quantity">
+        <label for="fishQty">Quantity</label>
+        <div class="qty-input-group">
+          <button type="button" class="qty-btn" onclick="decrementFishQty()">−</button>
+          <input type="number" id="fishQty" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementFishQty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addFishToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closeFishSelector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="fishOverlay" class="variant-overlay" onclick="closeFishSelector()"></div>
+
+  <div id="chickenModal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Select Chicken Portion & Price</h2>
+        <button class="close-btn" onclick="closeChickenSelector()">✕</button>
+      </div>
+      <div class="variant-options">
+        <label class="variant-option">
+          <input type="radio" name="chickenPrice" value="500" checked />
+          <span>Small - ₦500</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="chickenPrice" value="700" />
+          <span>Medium - ₦700</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="chickenPrice" value="1000" />
+          <span>Large - ₦1,000</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="chickenPrice" value="1200" />
+          <span>Extra Large - ₦1,200</span>
+        </label>
+      </div>
+      <div class="variant-quantity">
+        <label for="chickenQty">Quantity</label>
+        <div class="qty-input-group">
+          <button type="button" class="qty-btn" onclick="decrementChickenQty()">−</button>
+          <input type="number" id="chickenQty" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementChickenQty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addChickenToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closeChickenSelector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="chickenOverlay" class="variant-overlay" onclick="closeChickenSelector()"></div>
+
+  <div id="floatingCart" class="floating-cart">
+    <span class="cart-icon">🛒</span>
+    <span id="cartItemCount" class="cart-count"></span>
+  </div>
+
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <div class="cart-modal-header">
+        <h2>Your Order</h2>
+        <button id="closeCartModal" class="close-btn">✕</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="total-row">
+          <strong>Total:</strong>
+          <strong id="cartTotal">₦0</strong>
+        </div>
+        <label for="orderName">Your Name</label>
+        <input id="orderName" type="text" placeholder="Your name" />
+        <label for="orderPhone">Phone Number</label>
+        <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" />
+        <label for="orderLocation">Delivery Location</label>
+        <input id="orderLocation" type="text" placeholder="Idia Hall, University of Ibadan" value="Idia Hall, University of Ibadan" />
+        <button class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
+        <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+        <button class="btn btn-danger" onclick="clearCart()">Clear Order</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="availability.js"></script>
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Five Loaves & Two Fish | Nigerian Campus Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Five Loaves & Two Fish logo" />
+      <span>Five Loaves & Two Fish</span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="about.html">About</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Fresh campus meals at Idia Hall</p>
+        <h1>Delicious Nigerian Meals, Served Fresh Daily.</h1>
+        <p class="intro">Affordable dishes, quick delivery, right at Idia Hall, UI.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="order.html">Order Now</a>
+          <a class="btn btn-secondary" href="menu.html">View Menu</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="jollof meal o.jpg" alt="Fresh jollof rice meal" />
+      </div>
+    </section>
+
+    <section class="highlights grid-3">
+      <article>
+        <span class="icon">🍲</span>
+        <h2>Authentic Flavors</h2>
+        <p>Fresh stews, rice, and proteins made with home-style seasonings.</p>
+      </article>
+      <article>
+        <span class="icon">⚡</span>
+        <h2>Quick Delivery</h2>
+        <p>Campus delivery service within Idia Hall so you get food fast.</p>
+      </article>
+      <article>
+        <span class="icon">💰</span>
+        <h2>Affordable Meals</h2>
+        <p>Student-friendly prices with generous portions and variety.</p>
+      </article>
+    </section>
+
+    <section class="menu-preview">
+      <div class="section-header">
+        <span class="eyebrow">Featured Menu</span>
+        <h2>Campus favorites you can order today</h2>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <h3>Exclusive Jollof Rice</h3>
+          <p>Rich tomato rice served fresh and affordable.</p>
+          <strong>₦250</strong>
+        </article>
+        <article class="menu-card">
+          <h3>Special Noodles</h3>
+          <p>Signature noodles with mixed vegetables and savory spices.</p>
+          <strong>₦1,500</strong>
+        </article>
+        <article class="menu-card">
+          <h3>Egg</h3>
+          <p>Protein-packed egg add-on for any dish or soup.</p>
+          <strong>₦250</strong>
+        </article>
+      </div>
+      <div class="hero-actions center">
+        <a class="btn btn-primary" href="menu.html">Explore Full Menu</a>
+      </div>
+    </section>
+
+    <section class="story-block">
+      <div>
+        <h2>More than food, it’s community</h2>
+        <p>Five Loaves & Two Fish brings authentic Nigerian flavors to students and locals at UI. We honor tradition with every meal, using fresh ingredients and warm service so your campus dining feels like home.</p>
+      </div>
+      <div class="photo-grid">
+        <img src="jollof meal o.jpg" alt="Jollof rice meal" />
+        <img src="white rice meal.jpg" alt="White rice meal" />
+        <img src="noodles meal.jpg" alt="Noodles meal" />
+        <img src="swallow meal o.jpg" alt="Swallow meal" />
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  </footer>
+
+  <div id="floatingCart" class="floating-cart">
+    <span class="cart-icon">🛒</span>
+    <span id="cartItemCount" class="cart-count"></span>
+  </div>
+
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <div class="cart-modal-header">
+        <h2>Your Order</h2>
+        <button id="closeCartModal" class="close-btn">✕</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="total-row">
+          <strong>Total:</strong>
+          <strong id="cartTotal">₦0</strong>
+        </div>
+        <label for="orderName">Your Name</label>
+        <input id="orderName" type="text" placeholder="Your name" />
+        <label for="orderPhone">Phone Number</label>
+        <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" />
+        <label for="orderLocation">Delivery Location</label>
+        <input id="orderLocation" type="text" placeholder="Idia Hall, University of Ibadan" value="Idia Hall, University of Ibadan" />
+        <button class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
+        <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

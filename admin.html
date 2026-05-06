@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Availability | Five Loaves & Two Fish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Five Loaves & Two Fish logo" />
+      <span>Five Loaves & Two Fish</span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="admin.html" class="active">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div>
+        <span class="eyebrow">Business Admin</span>
+        <h1>Dish Availability Manager</h1>
+        <p>Securely login to manage dish availability and avoid unavailable-item orders.</p>
+      </div>
+      <a class="btn btn-secondary" href="menu.html">View Customer Menu</a>
+    </section>
+
+    <section class="admin-panel auth-panel" id="loginPanel">
+      <h2>Admin Login</h2>
+      <p class="note">Only authorized staff can access availability controls.</p>
+      <form id="loginForm" class="admin-form">
+        <label for="adminUsername">Username</label>
+        <input id="adminUsername" type="text" autocomplete="username" required />
+
+        <label for="adminPassword">Password</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" required />
+
+        <button class="btn btn-primary" type="submit">Login</button>
+      </form>
+      <p id="loginMessage" class="admin-message" aria-live="polite"></p>
+    </section>
+
+    <section class="admin-panel" id="adminControls" style="display: none;">
+      <div class="admin-actions">
+        <button class="btn btn-primary" id="allAvailableBtn">Mark All Available</button>
+        <button class="btn btn-secondary" id="allUnavailableBtn">Mark All Unavailable</button>
+        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+      </div>
+      <div id="adminItems" class="admin-grid"></div>
+      <p class="note">Changes save automatically in this browser. Use the same device/browser for menu control.</p>
+
+      <div class="admin-password-box">
+        <h3>Change Admin Password</h3>
+        <form id="changePasswordForm" class="admin-form">
+          <label for="currentPassword">Current Password</label>
+          <input id="currentPassword" type="password" autocomplete="current-password" required />
+
+          <label for="newPassword">New Password</label>
+          <input id="newPassword" type="password" minlength="8" autocomplete="new-password" required />
+
+          <label for="confirmPassword">Confirm New Password</label>
+          <input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required />
+
+          <button class="btn btn-primary" type="submit">Update Password</button>
+        </form>
+        <p id="passwordMessage" class="admin-message" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  </footer>
+
+  <script src="availability.js"></script>
+  <script>
+    const ADMIN_USERNAME = 'LoavesandFish';
+    const DEFAULT_PASSWORD = 'Fedwithfiveandtwo5000';
+    const PASSWORD_STORAGE_KEY = 'flffAdminPasswordHash';
+    const SESSION_STORAGE_KEY = 'flffAdminSession';
+
+    async function hashText(text) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      const digest = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(digest))
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    async function getStoredPasswordHash() {
+      const existing = localStorage.getItem(PASSWORD_STORAGE_KEY);
+      if (existing) return existing;
+      const defaultHash = await hashText(DEFAULT_PASSWORD);
+      localStorage.setItem(PASSWORD_STORAGE_KEY, defaultHash);
+      return defaultHash;
+    }
+
+    function setMessage(el, text, isError) {
+      if (!el) return;
+      el.textContent = text;
+      el.classList.toggle('error', Boolean(isError));
+      el.classList.toggle('success', !isError && text.length > 0);
+    }
+
+    function toggleAdminView(isAuthenticated) {
+      const loginPanel = document.getElementById('loginPanel');
+      const adminControls = document.getElementById('adminControls');
+      loginPanel.style.display = isAuthenticated ? 'none' : 'block';
+      adminControls.style.display = isAuthenticated ? 'block' : 'none';
+    }
+
+    async function initializeAdmin() {
+      if (!window.DishAvailability) return;
+      await getStoredPasswordHash();
+
+      const isAuthenticated = sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
+      toggleAdminView(isAuthenticated);
+
+      if (isAuthenticated) {
+        window.DishAvailability.renderAdminList('adminItems');
+      }
+
+      document.getElementById('allAvailableBtn')?.addEventListener('click', () => {
+        window.DishAvailability.setAllAvailability(true);
+        window.DishAvailability.renderAdminList('adminItems');
+      });
+
+      document.getElementById('allUnavailableBtn')?.addEventListener('click', () => {
+        window.DishAvailability.setAllAvailability(false);
+        window.DishAvailability.renderAdminList('adminItems');
+      });
+
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        sessionStorage.removeItem(SESSION_STORAGE_KEY);
+        toggleAdminView(false);
+        setMessage(document.getElementById('loginMessage'), 'Logged out successfully.', false);
+      });
+
+      document.getElementById('loginForm')?.addEventListener('submit', async event => {
+        event.preventDefault();
+        const username = document.getElementById('adminUsername').value.trim();
+        const password = document.getElementById('adminPassword').value;
+        const loginMessage = document.getElementById('loginMessage');
+
+        if (username !== ADMIN_USERNAME) {
+          setMessage(loginMessage, 'Invalid username or password.', true);
+          return;
+        }
+
+        const [enteredHash, storedHash] = await Promise.all([hashText(password), getStoredPasswordHash()]);
+        if (enteredHash !== storedHash) {
+          setMessage(loginMessage, 'Invalid username or password.', true);
+          return;
+        }
+
+        sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+        toggleAdminView(true);
+        window.DishAvailability.renderAdminList('adminItems');
+        setMessage(loginMessage, '');
+        event.target.reset();
+      });
+
+      document.getElementById('changePasswordForm')?.addEventListener('submit', async event => {
+        event.preventDefault();
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const passwordMessage = document.getElementById('passwordMessage');
+
+        if (newPassword.length < 8) {
+          setMessage(passwordMessage, 'New password must be at least 8 characters.', true);
+          return;
+        }
+        if (newPassword !== confirmPassword) {
+          setMessage(passwordMessage, 'New password and confirm password do not match.', true);
+          return;
+        }
+
+        const [currentHash, storedHash] = await Promise.all([hashText(currentPassword), getStoredPasswordHash()]);
+        if (currentHash !== storedHash) {
+          setMessage(passwordMessage, 'Current password is incorrect.', true);
+          return;
+        }
+
+        const newHash = await hashText(newPassword);
+        localStorage.setItem(PASSWORD_STORAGE_KEY, newHash);
+        setMessage(passwordMessage, 'Password updated successfully.', false);
+        event.target.reset();
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeAdmin);
+  </script>
+</body>
+</html>

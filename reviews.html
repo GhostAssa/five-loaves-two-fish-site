@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews - Five Loaves & Two Fish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .reviews-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .reviews-header h1 {
+      font-size: 2.5rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .reviews-header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .review-item {
+      background: var(--surface);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .review-name {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 1.1rem;
+    }
+
+    .review-date {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .review-rating {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .star {
+      color: #FFD700;
+      font-size: 1.2rem;
+    }
+
+    .review-text {
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-form {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 3rem 0;
+      border: 2px solid var(--border);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+    }
+
+    .rating-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .rating-selector .star {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #ddd;
+      transition: color 0.2s;
+    }
+
+    .rating-selector .star:hover,
+    .rating-selector .star.active {
+      color: #FFD700;
+    }
+
+    .share-section {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .share-section h3 {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .share-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .share-btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .share-btn-twitter {
+      background: #1DA1F2;
+      color: white;
+    }
+
+    .share-btn-facebook {
+      background: #1877F2;
+      color: white;
+    }
+
+    .share-btn-instagram {
+      background: #E4405F;
+      color: white;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .success-message {
+      display: none;
+      background: #4CAF50;
+      color: white;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .reviews-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .review-item,
+      .review-form,
+      .share-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="nav-brand">Five Loaves & Two Fish</div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="order.html">Order</a></li>
+        <li><a href="reviews.html" class="active">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="page-hero" style="background: linear-gradient(135deg, var(--primary), var(--accent));">
+      <h1>Customer Reviews</h1>
+      <p>See what our satisfied customers have to say</p>
+    </div>
+
+    <div class="reviews-container">
+      <!-- Existing Reviews -->
+      <section class="reviews-list">
+        <div class="review-item">
+          <div class="review-header">
+            <span class="review-name">Uche Okpokwu</span>
+            <span class="review-date">3 weeks ago</span>
+          </div>
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+          <p class="review-text">"The meals at Five Loaves & Two Fish are absolutely delicious! The Jollof rice and fish were so fresh and well-prepared. Highly recommend!"</p>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <span class="review-name">Olutunde John</span>
+            <span class="review-date">2 weeks ago</span>
+          </div>
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+          <p class="review-text">"Great food quality and fast service. The swallow and soup combination is heavenly. Definitely ordering again!"</p>
+        </div>
+
+        <div class="review-item">
+          <div class="review-header">
+            <span class="review-name">Mustapha Jubril</span>
+            <span class="review-date">1 week ago</span>
+          </div>
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+          <p class="review-text">"Fantastic campus restaurant! The variety of meals and reasonable prices make it the perfect spot. Customer service is also excellent."</p>
+        </div>
+      </section>
+
+      <!-- Share Our Service -->
+      <section class="share-section">
+        <h3>Share Our Service</h3>
+        <p style="color: var(--muted); margin-bottom: 1rem;">Love Five Loaves & Two Fish? Share the word with your friends!</p>
+        <div class="share-buttons">
+          <a href="https://wa.me/?text=Check%20out%20Five%20Loaves%20%26%20Two%20Fish%20-%20amazing%20campus%20restaurant!%20https://fiveleavesandtwofish.com" class="share-btn share-btn-whatsapp" target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="https://twitter.com/intent/tweet?text=Check%20out%20Five%20Loaves%20%26%20Two%20Fish%20-%20amazing%20campus%20restaurant!&url=https://fiveleavesandtwofish.com" class="share-btn share-btn-twitter" target="_blank" rel="noreferrer">Twitter</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://fiveleavesandtwofish.com" class="share-btn share-btn-facebook" target="_blank" rel="noreferrer">Facebook</a>
+          <button class="share-btn share-btn-instagram" onclick="copyShareLink()">Copy Link</button>
+        </div>
+      </section>
+
+      <!-- Review Submission Form -->
+      <section class="review-form">
+        <h2>Leave Your Review</h2>
+        <div id="successMessage" class="success-message">Thank you for your review! We appreciate your feedback.</div>
+        <form id="reviewForm" onsubmit="submitReview(event)">
+          <div class="form-group">
+            <label for="reviewName">Your Name</label>
+            <input type="text" id="reviewName" name="reviewName" required placeholder="Enter your name" />
+          </div>
+
+          <div class="form-group">
+            <label for="reviewRating">Rating</label>
+            <div class="rating-selector" id="ratingSelector">
+              <span class="star" data-rating="1">★</span>
+              <span class="star" data-rating="2">★</span>
+              <span class="star" data-rating="3">★</span>
+              <span class="star" data-rating="4">★</span>
+              <span class="star" data-rating="5">★</span>
+            </div>
+            <input type="hidden" id="reviewRating" name="reviewRating" value="5" />
+          </div>
+
+          <div class="form-group">
+            <label for="reviewText">Your Review</label>
+            <textarea id="reviewText" name="reviewText" required placeholder="Share your experience with Five Loaves & Two Fish..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+    // Rating selector
+    const ratingSelector = document.getElementById('ratingSelector');
+    const reviewRating = document.getElementById('reviewRating');
+
+    if (ratingSelector) {
+      const stars = ratingSelector.querySelectorAll('.star');
+      stars.forEach(star => {
+        star.addEventListener('click', () => {
+          const rating = star.getAttribute('data-rating');
+          reviewRating.value = rating;
+          stars.forEach(s => {
+            if (s.getAttribute('data-rating') <= rating) {
+              s.classList.add('active');
+            } else {
+              s.classList.remove('active');
+            }
+          });
+        });
+
+        star.addEventListener('mouseover', () => {
+          const rating = star.getAttribute('data-rating');
+          stars.forEach(s => {
+            if (s.getAttribute('data-rating') <= rating) {
+              s.style.color = '#FFD700';
+            } else {
+              s.style.color = '#ddd';
+            }
+          });
+        });
+      });
+
+      ratingSelector.addEventListener('mouseout', () => {
+        const currentRating = reviewRating.value;
+        stars.forEach(s => {
+          if (s.getAttribute('data-rating') <= currentRating) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+      });
+    }
+
+    // Form submission
+    function submitReview(event) {
+      event.preventDefault();
+      const name = document.getElementById('reviewName').value;
+      const rating = document.getElementById('reviewRating').value;
+      const text = document.getElementById('reviewText').value;
+
+      if (!name || !text) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Store review in localStorage
+      let reviews = JSON.parse(localStorage.getItem('flffReviews')) || [];
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+      reviews.push({
+        name: name,
+        rating: parseInt(rating),
+        text: text,
+        date: dateStr
+      });
+
+      localStorage.setItem('flffReviews', JSON.stringify(reviews));
+
+      // Show success message
+      const successMsg = document.getElementById('successMessage');
+      successMsg.classList.add('show');
+      setTimeout(() => {
+        successMsg.classList.remove('show');
+      }, 3000);
+
+      // Reset form
+      document.getElementById('reviewForm').reset();
+      reviewRating.value = '5';
+      document.querySelectorAll('#ratingSelector .star').forEach((s, i) => {
+        if (i < 5) s.classList.add('active');
+        else s.classList.remove('active');
+      });
+    }
+
+    // Copy share link
+    function copyShareLink() {
+      const text = 'Check out Five Loaves & Two Fish - amazing campus restaurant!';
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Link copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>

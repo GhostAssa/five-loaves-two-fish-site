@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order & Delivery | Five Loaves & Two Fish</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Five Loaves & Two Fish logo" />
+      <span>Five Loaves & Two Fish</span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html" class="active">Order</a>
+      <a href="about.html">About</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero page-order">
+      <div>
+        <span class="eyebrow">Order & Delivery</span>
+        <h1>Place your order and get delivery to Idia Hall.</h1>
+        <p>Use the order form below or tap WhatsApp for a fast checkout.</p>
+      </div>
+      <a class="btn btn-primary" href="menu.html">Go to Menu</a>
+    </section>
+
+    <section class="form-banner">
+      <div>
+        <h2>Fast order form</h2>
+        <p>Fill in your details, select your dish, and we will build your order message.</p>
+      </div>
+      <div>
+        <p><strong>Contact:</strong> +2348030735623</p>
+        <p><strong>Delivery:</strong> Available across UI.</p>
+      </div>
+    </section>
+
+    <section class="order-form-section">
+      <form id="orderForm">
+        <h2>Select items & quantities</h2>
+
+        <label for="dishCount">How many items to order?</label>
+        <select id="dishCount" name="dishCount">
+          <option>Choose items from the Menu page first</option>
+          <option value="1">1 item</option>
+          <option value="2">2 items</option>
+          <option value="3">3 items</option>
+          <option value="4">4 items</option>
+          <option value="5">5+ items</option>
+        </select>
+
+        <p style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+          <strong>Quick option:</strong> Add items from the <a href="menu.html" style="color: var(--accent);">Menu page</a>, then open your cart below to proceed.
+        </p>
+
+        <button type="button" class="btn btn-secondary" onclick="openCart()">Open My Cart</button>
+      </form>
+
+      <aside class="order-summary">
+        <h2>How it works</h2>
+        <ol>
+          <li>Go to the <a href="menu.html" style="color: var(--accent);">Menu</a> and click "Add to Order" on dishes you want</li>
+          <li>Click the cart icon at the bottom left</li>
+          <li>Enter your name and delivery location</li>
+          <li>Click "Send Order to WhatsApp"</li>
+          <li>We'll send payment details in our reply</li>
+        </ol>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  </footer>
+
+  <div id="floatingCart" class="floating-cart">
+    <span class="cart-icon">🛒</span>
+    <span id="cartItemCount" class="cart-count"></span>
+  </div>
+
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+      <div class="cart-modal-header">
+        <h2>Your Order</h2>
+        <button id="closeCartModal" class="close-btn">✕</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-modal-footer">
+        <div class="total-row">
+          <strong>Total:</strong>
+          <strong id="cartTotal">₦0</strong>
+        </div>
+        <label for="orderName">Your Name</label>
+        <input id="orderName" type="text" placeholder="Your name" />
+        <label for="orderPhone">Phone Number</label>
+        <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" />
+        <label for="orderLocation">Delivery Location</label>
+        <input id="orderLocation" type="text" placeholder="Idia Hall, University of Ibadan" value="Idia Hall, University of Ibadan" />
+        <button class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
+        <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
