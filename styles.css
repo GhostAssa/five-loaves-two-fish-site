@@ -371,26 +371,39 @@ h1 {
   position: relative;
 }
 
+.password-container input {
+  padding-right: 45px;
+  width: 100%;
+}
+
 .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0;
+  top: 0;
+  bottom: 0;
   background: none;
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
   color: var(--muted);
-  padding: 0;
-  width: 30px;
-  height: 30px;
+  padding: 0 12px;
+  width: auto;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .toggle-password:hover {
   color: var(--primary);
+}
+
+@media (max-width: 640px) {
+  .toggle-password {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
 }
 
 .admin-message {
