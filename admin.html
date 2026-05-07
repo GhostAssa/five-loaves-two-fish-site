@@ -41,7 +41,10 @@
         <input id="adminUsername" type="text" autocomplete="username" required />
 
         <label for="adminPassword">Password</label>
-        <input id="adminPassword" type="password" autocomplete="current-password" required />
+        <div class="password-container">
+          <input id="adminPassword" type="password" autocomplete="current-password" required />
+          <button type="button" id="togglePassword" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+        </div>
 
         <button class="btn btn-primary" type="submit">Login</button>
       </form>
