@@ -82,6 +82,14 @@ nav a {
   align-items: center;
 }
 
+.nav-admin {
+  display: none;
+}
+
+.nav-admin.visible {
+  display: inline-flex;
+}
+
 nav a.active,
 nav a:hover {
   color: var(--accent);
