@@ -215,19 +215,12 @@ function submitOrder() {
   // Open WhatsApp with the order message
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encoded}`;
 
-  // Open in a new window/tab if possible; otherwise redirect in the same window.
-  const newWindow = window.open(whatsappURL, '_blank');
+  // Redirect to WhatsApp (simplest and most reliable method)
+  window.location.href = whatsappURL;
 
-  if (newWindow) {
-    setTimeout(() => {
-      clearCart();
-      closeCart();
-    }, 500);
-  } else {
-    window.location.href = whatsappURL;
-    clearCart();
-    closeCart();
-  }
+  // Clear cart after redirect
+  clearCart();
+  closeCart();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
