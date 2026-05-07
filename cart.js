@@ -212,69 +212,22 @@ function submitOrder() {
   const encoded = encodeURIComponent(message);
   const phoneNumber = '2348030735623';
 
-  // Try multiple WhatsApp URL formats for maximum compatibility
-  const whatsappUrls = [
-    `whatsapp://send?phone=${phoneNumber}&text=${encoded}`, // Direct app protocol
-    `https://wa.me/${phoneNumber}?text=${encoded}`, // Web fallback
-    `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encoded}` // Alternative web URL
-  ];
+  // Open WhatsApp with the order message
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encoded}`;
 
-  let success = false;
+  // Open in a new window/tab
+  const win = window.open(whatsappURL, '_blank');
 
-  // Function to try opening WhatsApp
-  function tryOpenWhatsapp(url, index) {
-    try {
-      const link = document.createElement('a');
-      link.href = url;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-
-      // Use a timeout to ensure the link is in the DOM
-      setTimeout(() => {
-        link.click();
-        document.body.removeChild(link);
-
-        // Check if we successfully opened WhatsApp after a short delay
-        setTimeout(() => {
-          if (!success && index < whatsappUrls.length - 1) {
-            // Try the next URL format
-            tryOpenWhatsapp(whatsappUrls[index + 1], index + 1);
-          }
-        }, 1000);
-      }, 100);
-
-    } catch (error) {
-      console.log('WhatsApp redirect attempt failed:', error);
-      if (index < whatsappUrls.length - 1) {
-        tryOpenWhatsapp(whatsappUrls[index + 1], index + 1);
-      }
-    }
+  // If window opened successfully, clear cart after a short delay
+  if (win) {
+    setTimeout(() => {
+      clearCart();
+      closeCart();
+    }, 500);
+  } else {
+    // Fallback if popup was blocked
+    alert(`Unable to open WhatsApp. Please send this message to +2348030735623:\n\n${message}`);
   }
-
-  // Start with the first URL
-  tryOpenWhatsapp(whatsappUrls[0], 0);
-
-  // Set success flag after successful redirect (detected by page becoming hidden)
-  const checkSuccess = () => {
-    if (document.hidden || document.visibilityState === 'hidden') {
-      success = true;
-    }
-  };
-
-  document.addEventListener('visibilitychange', checkSuccess);
-
-  // Final fallback after all attempts
-  setTimeout(() => {
-    document.removeEventListener('visibilitychange', checkSuccess);
-    if (!success) {
-      // Last resort: show the message and ask user to copy it
-      const finalMessage = `Please send this message to WhatsApp: +2348030735623\n\n${message}`;
-      alert(finalMessage);
-    }
-  }, 3000);
-
-  clearCart();
-  closeCart();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
