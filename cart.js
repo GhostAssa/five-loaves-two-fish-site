@@ -209,11 +209,8 @@ function submitOrder() {
 
   const message = `Hello, Five Loaves and Two Fish.\nMy order is:\n${orderList}\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ₦${total}\n\nCan I have your account details?`;
 
-  alert(`Order prepared! Please contact us at +2348030735623 with this message:\n\n${message}`);
-
-  // Removed WhatsApp opening as per user request
-  // const encoded = encodeURIComponent(message);
-  // window.open(`https://wa.me/2348030735623?text=${encoded}`, '_blank');
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/2348030735623?text=${encoded}`, '_blank');
 
   clearCart();
   closeCart();
