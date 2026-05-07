@@ -83,10 +83,6 @@ nav a {
 }
 
 .nav-admin {
-  display: none;
-}
-
-.nav-admin.visible {
   display: inline-flex;
 }
 
