@@ -215,18 +215,18 @@ function submitOrder() {
   // Open WhatsApp with the order message
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encoded}`;
 
-  // Open in a new window/tab
-  const win = window.open(whatsappURL, '_blank');
+  // Open in a new window/tab if possible; otherwise redirect in the same window.
+  const newWindow = window.open(whatsappURL, '_blank');
 
-  // If window opened successfully, clear cart after a short delay
-  if (win) {
+  if (newWindow) {
     setTimeout(() => {
       clearCart();
       closeCart();
     }, 500);
   } else {
-    // Fallback if popup was blocked
-    alert(`Unable to open WhatsApp. Please send this message to +2348030735623:\n\n${message}`);
+    window.location.href = whatsappURL;
+    clearCart();
+    closeCart();
   }
 }
 
