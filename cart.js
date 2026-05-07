@@ -212,16 +212,25 @@ function submitOrder() {
   const encoded = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/2348030735623?text=${encoded}`;
 
-  // Mobile-friendly WhatsApp redirect
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  // Create a temporary link element for reliable mobile WhatsApp opening
+  const link = document.createElement('a');
+  link.href = whatsappUrl;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
 
-  if (isMobile) {
-    // On mobile, use location.href for better app opening
-    window.location.href = whatsappUrl;
-  } else {
-    // On desktop, use window.open
-    window.open(whatsappUrl, '_blank');
-  }
+  // For mobile devices, we need to programmatically click the link
+  // This works better than window.location.href for app redirects
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // Fallback for very old browsers (though unlikely)
+  setTimeout(() => {
+    if (!document.hidden) {
+      // If still on the page after 2 seconds, try window.open as fallback
+      window.open(whatsappUrl, '_blank');
+    }
+  }, 2000);
 
   clearCart();
   closeCart();
