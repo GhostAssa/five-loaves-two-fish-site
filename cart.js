@@ -210,7 +210,18 @@ function submitOrder() {
   const message = `Hello, Five Loaves and Two Fish.\nMy order is:\n${orderList}\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ₦${total}\n\nCan I have your account details?`;
 
   const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/2348030735623?text=${encoded}`, '_blank');
+  const whatsappUrl = `https://wa.me/2348030735623?text=${encoded}`;
+
+  // Mobile-friendly WhatsApp redirect
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // On mobile, use location.href for better app opening
+    window.location.href = whatsappUrl;
+  } else {
+    // On desktop, use window.open
+    window.open(whatsappUrl, '_blank');
+  }
 
   clearCart();
   closeCart();
