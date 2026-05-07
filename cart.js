@@ -210,27 +210,68 @@ function submitOrder() {
   const message = `Hello, Five Loaves and Two Fish.\nMy order is:\n${orderList}\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ₦${total}\n\nCan I have your account details?`;
 
   const encoded = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/2348030735623?text=${encoded}`;
+  const phoneNumber = '2348030735623';
 
-  // Create a temporary link element for reliable mobile WhatsApp opening
-  const link = document.createElement('a');
-  link.href = whatsappUrl;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
+  // Try multiple WhatsApp URL formats for maximum compatibility
+  const whatsappUrls = [
+    `whatsapp://send?phone=${phoneNumber}&text=${encoded}`, // Direct app protocol
+    `https://wa.me/${phoneNumber}?text=${encoded}`, // Web fallback
+    `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encoded}` // Alternative web URL
+  ];
 
-  // For mobile devices, we need to programmatically click the link
-  // This works better than window.location.href for app redirects
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  let success = false;
 
-  // Fallback for very old browsers (though unlikely)
-  setTimeout(() => {
-    if (!document.hidden) {
-      // If still on the page after 2 seconds, try window.open as fallback
-      window.open(whatsappUrl, '_blank');
+  // Function to try opening WhatsApp
+  function tryOpenWhatsapp(url, index) {
+    try {
+      const link = document.createElement('a');
+      link.href = url;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+
+      // Use a timeout to ensure the link is in the DOM
+      setTimeout(() => {
+        link.click();
+        document.body.removeChild(link);
+
+        // Check if we successfully opened WhatsApp after a short delay
+        setTimeout(() => {
+          if (!success && index < whatsappUrls.length - 1) {
+            // Try the next URL format
+            tryOpenWhatsapp(whatsappUrls[index + 1], index + 1);
+          }
+        }, 1000);
+      }, 100);
+
+    } catch (error) {
+      console.log('WhatsApp redirect attempt failed:', error);
+      if (index < whatsappUrls.length - 1) {
+        tryOpenWhatsapp(whatsappUrls[index + 1], index + 1);
+      }
     }
-  }, 2000);
+  }
+
+  // Start with the first URL
+  tryOpenWhatsapp(whatsappUrls[0], 0);
+
+  // Set success flag after successful redirect (detected by page becoming hidden)
+  const checkSuccess = () => {
+    if (document.hidden || document.visibilityState === 'hidden') {
+      success = true;
+    }
+  };
+
+  document.addEventListener('visibilitychange', checkSuccess);
+
+  // Final fallback after all attempts
+  setTimeout(() => {
+    document.removeEventListener('visibilitychange', checkSuccess);
+    if (!success) {
+      // Last resort: show the message and ask user to copy it
+      const finalMessage = `Please send this message to WhatsApp: +2348030735623\n\n${message}`;
+      alert(finalMessage);
+    }
+  }, 3000);
 
   clearCart();
   closeCart();
