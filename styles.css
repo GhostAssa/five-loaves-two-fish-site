@@ -572,6 +572,11 @@ select {
   .hero-actions {
     flex-direction: column;
   }
+
+  .menu-grid,
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Cart System */
