@@ -919,10 +919,24 @@ select {
 .total-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   font-size: 1.25rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border);
+}
+
+.total-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  max-width: 70%;
+}
+
+.total-text span {
+  white-space: nowrap;
 }
 
 .cart-modal-footer label {
