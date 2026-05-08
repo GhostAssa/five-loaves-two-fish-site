@@ -98,12 +98,30 @@
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
+            <img src="boiled yam.jpg" alt="Boiled Yam" />
+          </div>
+          <h3>Boiled Yam</h3>
+          <p>Soft boiled yam served in generous pieces.</p>
+          <strong>₦100</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Boiled Yam', 100)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
             <img src="moi moi.jpg" alt="Hot Moi Moi" />
           </div>
           <h3>Hot Moi Moi</h3>
           <p>Steamed bean pudding served warm and rich.</p>
           <strong>₦200</strong>
           <button class="add-to-order-btn" onclick="openQuantitySelector('Hot Moi Moi', 200)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
+            <img src="Beans.jpg" alt="Beans" />
+          </div>
+          <h3>Beans</h3>
+          <p>Hearty beans with rich flavor and soft texture.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Beans', 200)">Add to Order</button>
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
@@ -176,12 +194,12 @@
       <div class="menu-grid">
         <article class="menu-item">
           <div class="menu-item-image">
-            <img src="boiled egg.jpg" alt="Egg" />
+            <img src="egg sauce.jpg" alt="Fried Egg" />
           </div>
-          <h3>Egg</h3>
-          <p>Soft cooked egg added to any dish or soup.</p>
-          <strong>₦250</strong>
-          <button class="add-to-order-btn" onclick="openQuantitySelector('Egg', 250)">Add to Order</button>
+          <h3>Fried Egg</h3>
+          <p>Choose between 1 egg or 2 eggs, cooked fresh for your meal.</p>
+          <strong>₦400 / ₦700</strong>
+          <button class="add-to-order-btn" onclick="openEggSelector()">Add to Order</button>
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
@@ -234,8 +252,8 @@
           </div>
           <h3>Ponmo</h3>
           <p>Crispy cow skin add-on for your favorite meal.</p>
-          <strong>₦200</strong>
-          <button class="add-to-order-btn" onclick="openQuantitySelector('Ponmo', 200)">Add to Order</button>
+          <strong>2 for ₦100</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Ponmo (2 for 100)', 100)">Add to Order</button>
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
@@ -243,17 +261,17 @@
           </div>
           <h3>Plantain</h3>
           <p>Sweet fried plantain side to complement any dish.</p>
-          <strong>₦200</strong>
-          <button class="add-to-order-btn" onclick="openQuantitySelector('Plantain', 200)">Add to Order</button>
+          <strong>2 for ₦100</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Plantain (2 for 100)', 100)">Add to Order</button>
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
-            <img src="assorted.jpg" alt="Assorted" />
+            <img src="assorted.jpg" alt="Assorted Meat" />
           </div>
-          <h3>Assorted</h3>
-          <p>Assorted extras and side servings to complete your meal.</p>
-          <strong>₦500</strong>
-          <button class="add-to-order-btn" onclick="openQuantitySelector('Assorted', 500)">Add to Order</button>
+          <h3>Assorted Meat</h3>
+          <p>Mixed meats and flavorful sides for a rich meal.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Assorted Meat', 200)">Add to Order</button>
         </article>
       </div>
     </section>
@@ -412,6 +430,31 @@
   </div>
 
   <div id="chickenOverlay" class="variant-overlay" onclick="closeChickenSelector()"></div>
+
+  <div id="eggModal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Select Fried Egg Option</h2>
+        <button class="close-btn" onclick="closeEggSelector()">✕</button>
+      </div>
+      <div class="variant-options">
+        <label class="variant-option">
+          <input type="radio" name="eggPrice" value="400" checked />
+          <span>1 egg - ₦400</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="eggPrice" value="700" />
+          <span>2 eggs - ₦700</span>
+        </label>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addEggToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closeEggSelector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="eggOverlay" class="variant-overlay" onclick="closeEggSelector()"></div>
 
   <div id="floatingCart" class="floating-cart">
     <span class="cart-icon">🛒</span>

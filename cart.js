@@ -52,6 +52,10 @@ function getCartCount() {
   return cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
+function getDeliveryFee() {
+  return 300;
+}
+
 function updateCartUI() {
   const cartIcon = document.getElementById('floatingCart');
   const cartCount = document.getElementById('cartItemCount');
@@ -189,8 +193,20 @@ function renderCartModal() {
     )
     .join('');
 
+  const feeRow = `
+    <div class="cart-item cart-item-fee">
+      <div>
+        <strong>Delivery Fee</strong>
+        <p>Non-editable</p>
+      </div>
+      <strong>₦${getDeliveryFee()}</strong>
+    </div>
+  `;
+
+  cartItems.innerHTML += feeRow;
+
   if (cartTotal) {
-    cartTotal.textContent = `₦${getCartTotal().toLocaleString()}`;
+    cartTotal.textContent = `₦${(getCartTotal() + getDeliveryFee()).toLocaleString()}`;
   }
 }
 
@@ -205,9 +221,10 @@ function submitOrder() {
   const phone = document.getElementById('orderPhone')?.value || 'No phone provided';
 
   const orderList = cart.map(item => `- ${item.quantity}x ${item.name} (₦${item.price * item.quantity})`).join('\n');
-  const total = getCartTotal();
+  const deliveryFee = getDeliveryFee();
+  const total = getCartTotal() + deliveryFee;
 
-  const message = `Hello, Five Loaves and Two Fish.\nMy order is:\n${orderList}\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ₦${total}\n\nCan I have your account details?`;
+  const message = `Hello, Five Loaves and Two Fish.\nMy order is:\n${orderList}\n- Delivery Fee (₦${deliveryFee})\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ₦${total}\n\nCan I have your account details?`;
 
   const encoded = encodeURIComponent(message);
   const phoneNumber = '2348030735623';
