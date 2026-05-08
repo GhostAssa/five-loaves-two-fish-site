@@ -439,3 +439,60 @@ function addChickenToCart() {
   closeChickenSelector();
   document.getElementById('chickenQty').value = '1';
 }
+
+function openEggSelector() {
+  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Fried Egg')) {
+    alert('Sorry, Fried Egg is currently unavailable.');
+    return;
+  }
+  const modal = document.getElementById('eggModal');
+  const overlay = document.getElementById('eggOverlay');
+  const qtyInput = document.getElementById('eggQty');
+  if (qtyInput) {
+    qtyInput.value = '1';
+  }
+  if (modal) {
+    modal.classList.add('open');
+  }
+  if (overlay) {
+    overlay.classList.add('open');
+  }
+}
+
+function closeEggSelector() {
+  const modal = document.getElementById('eggModal');
+  const overlay = document.getElementById('eggOverlay');
+  if (modal) {
+    modal.classList.remove('open');
+  }
+  if (overlay) {
+    overlay.classList.remove('open');
+  }
+}
+
+function incrementEggQty() {
+  const input = document.getElementById('eggQty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) + 1);
+}
+
+function decrementEggQty() {
+  const input = document.getElementById('eggQty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
+}
+
+function addEggToCart() {
+  const selected = document.querySelector('input[name="eggPrice"]:checked');
+  const qty = parseInt(document.getElementById('eggQty').value, 10) || 1;
+  if (!selected) {
+    alert('Please select an egg option');
+    return;
+  }
+  const price = parseInt(selected.value, 10);
+  const itemName = selected.value === '700' ? 'Fried Egg (2 eggs)' : 'Fried Egg (1 egg)';
+  addToCart(itemName, price, qty);
+  closeEggSelector();
+  const qtyInput = document.getElementById('eggQty');
+  if (qtyInput) qtyInput.value = '1';
+}

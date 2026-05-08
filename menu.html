@@ -447,6 +447,14 @@
           <span>2 eggs - ₦700</span>
         </label>
       </div>
+      <div class="variant-quantity">
+        <label for="eggQty">Quantity</label>
+        <div class="quantity-controls">
+          <button type="button" class="qty-btn" onclick="decrementEggQty()">−</button>
+          <input id="eggQty" type="number" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementEggQty()">+</button>
+        </div>
+      </div>
       <div class="variant-actions">
         <button class="btn btn-primary" onclick="addEggToCart()">Add to Order</button>
         <button class="btn btn-secondary" onclick="closeEggSelector()">Cancel</button>
@@ -470,7 +478,7 @@
       <div id="cartItems" class="cart-items"></div>
       <div class="cart-modal-footer">
         <div class="total-row">
-          <strong>Total: Delivery fee (300) + [their order]</strong>
+          <strong>Total: Delivery fee (300) + [input the total price of their order]</strong>
           <strong id="cartTotal">₦0</strong>
         </div>
         <label for="orderName">Your Name</label>
