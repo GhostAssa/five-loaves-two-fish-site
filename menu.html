@@ -230,6 +230,15 @@
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
+            <img src="bread.jpg" alt="Bread" />
+          </div>
+          <h3>Bread</h3>
+          <p>Fresh bread options available in three price sizes.</p>
+          <strong>₦300, ₦400, ₦500</strong>
+          <button class="add-to-order-btn" onclick="openBreadSelector()">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
             <img src="goat meat.jpg" alt="Goat Meat" />
           </div>
           <h3>Goat Meat</h3>
@@ -430,6 +439,43 @@
   </div>
 
   <div id="chickenOverlay" class="variant-overlay" onclick="closeChickenSelector()"></div>
+
+  <div id="breadModal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Select Bread Size & Price</h2>
+        <button class="close-btn" onclick="closeBreadSelector()">✕</button>
+      </div>
+      <div class="variant-options">
+        <label class="variant-option">
+          <input type="radio" name="breadPrice" value="300" checked />
+          <span>Small - ₦300</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="breadPrice" value="400" />
+          <span>Medium - ₦400</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="breadPrice" value="500" />
+          <span>Large - ₦500</span>
+        </label>
+      </div>
+      <div class="variant-quantity">
+        <label for="breadQty">Quantity</label>
+        <div class="quantity-controls">
+          <button type="button" class="qty-btn" onclick="decrementBreadQty()">−</button>
+          <input id="breadQty" type="number" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementBreadQty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addBreadToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closeBreadSelector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="breadOverlay" class="variant-overlay" onclick="closeBreadSelector()"></div>
 
   <div id="eggModal" class="variant-modal">
     <div class="variant-modal-content">

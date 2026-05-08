@@ -440,6 +440,68 @@ function addChickenToCart() {
   document.getElementById('chickenQty').value = '1';
 }
 
+function openBreadSelector() {
+  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Bread')) {
+    alert('Sorry, Bread is currently unavailable.');
+    return;
+  }
+  const modal = document.getElementById('breadModal');
+  const overlay = document.getElementById('breadOverlay');
+  const qtyInput = document.getElementById('breadQty');
+  if (qtyInput) {
+    qtyInput.value = '1';
+  }
+  if (modal) {
+    modal.classList.add('open');
+  }
+  if (overlay) {
+    overlay.classList.add('open');
+  }
+}
+
+function closeBreadSelector() {
+  const modal = document.getElementById('breadModal');
+  const overlay = document.getElementById('breadOverlay');
+  if (modal) {
+    modal.classList.remove('open');
+  }
+  if (overlay) {
+    overlay.classList.remove('open');
+  }
+}
+
+function incrementBreadQty() {
+  const input = document.getElementById('breadQty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) + 1);
+}
+
+function decrementBreadQty() {
+  const input = document.getElementById('breadQty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
+}
+
+function addBreadToCart() {
+  const selected = document.querySelector('input[name="breadPrice"]:checked');
+  const qty = parseInt(document.getElementById('breadQty').value, 10) || 1;
+  if (!selected) {
+    alert('Please select a bread size');
+    return;
+  }
+  const price = parseInt(selected.value, 10);
+  const breadLabel = {
+    '300': 'Small',
+    '400': 'Medium',
+    '500': 'Large'
+  }[selected.value] || 'Bread';
+  const itemName = `Bread (${breadLabel} - ₦${price})`;
+  addToCart(itemName, price, qty);
+  closeBreadSelector();
+  const qtyInput = document.getElementById('breadQty');
+  if (qtyInput) qtyInput.value = '1';
+}
+
 function openEggSelector() {
   if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Fried Egg')) {
     alert('Sorry, Fried Egg is currently unavailable.');
