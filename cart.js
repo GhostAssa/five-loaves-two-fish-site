@@ -200,7 +200,7 @@ function submitOrder() {
     return;
   }
 
-  const location = document.getElementById('orderLocation')?.value || 'Idia Hall, University of Ibadan';
+  const location = document.getElementById('orderLocation')?.value || 'Queen Idia Hall, University of Ibadan';
   const name = document.getElementById('orderName')?.value || 'Customer';
   const phone = document.getElementById('orderPhone')?.value || 'No phone provided';
 
