@@ -973,7 +973,7 @@ select {
 }
 
 .add-to-order-btn {
-  background: var(--primary);
+  background: var(--accent);
   color: white;
   border: none;
   padding: 0.75rem 1.2rem;
@@ -985,7 +985,7 @@ select {
 }
 
 .add-to-order-btn:hover {
-  background: var(--primary-dark);
+  background: var(--accent-dark);
   transform: translateY(-1px);
 }
 
