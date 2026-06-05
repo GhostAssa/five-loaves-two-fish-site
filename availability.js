@@ -1,5 +1,10 @@
 (function () {
   const STORAGE_KEY = 'flffAvailability';
+
+  // Shared cross-device availability store (jsonblob.com — free, no login)
+  // This lets admin changes on any device instantly affect the customer menu.
+  const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/019e956a-e162-77d5-9400-4a48d15e920a';
+
   const MENU_ITEMS = [
     'Exclusive White Rice',
     'Swallow',
@@ -61,6 +66,30 @@
 
   function saveAvailabilityMap(map) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
+    pushToBlob(map);
+  }
+
+  function pushToBlob(map) {
+    fetch(BLOB_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(map)
+    }).catch(() => {});
+  }
+
+  // Pull latest state from the shared blob, update localStorage, then call callback
+  function syncFromBlob(callback) {
+    fetch(BLOB_URL)
+      .then(r => (r.ok ? r.json() : null))
+      .then(data => {
+        if (data && typeof data === 'object') {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+        if (callback) callback();
+      })
+      .catch(() => {
+        if (callback) callback();
+      });
   }
 
   function setAvailability(itemName, isAvailable) {
@@ -143,18 +172,20 @@
     isItemAvailable,
     applyMenuAvailabilityState,
     renderAdminList,
-    setAllAvailability
+    setAllAvailability,
+    syncFromBlob,
   };
 
   document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.menu-item')) {
-      applyMenuAvailabilityState();
+      // Pull latest availability from shared store before rendering menu
+      syncFromBlob(() => applyMenuAvailabilityState());
     }
 
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('adminPassword');
     if (togglePassword && passwordInput) {
-      togglePassword.addEventListener('click', function() {
+      togglePassword.addEventListener('click', function () {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
         this.textContent = type === 'password' ? '👁️' : '🙈';

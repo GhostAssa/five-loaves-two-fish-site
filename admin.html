@@ -125,12 +125,14 @@
       if (!window.DishAvailability) return;
       await getStoredPasswordHash();
 
-      const isAuthenticated = sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
-      toggleAdminView(isAuthenticated);
-
-      if (isAuthenticated) {
-        window.DishAvailability.renderAdminList('adminItems');
-      }
+      // Pull latest availability from shared store before showing the panel
+      window.DishAvailability.syncFromBlob(() => {
+        const isAuthenticated = sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
+        toggleAdminView(isAuthenticated);
+        if (isAuthenticated) {
+          window.DishAvailability.renderAdminList('adminItems');
+        }
+      });
 
       document.getElementById('allAvailableBtn')?.addEventListener('click', () => {
         window.DishAvailability.setAllAvailability(true);
