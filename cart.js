@@ -584,15 +584,22 @@ function openPackage1Selector() {
   const overlay = document.getElementById('package1Overlay');
   const qtyInput = document.getElementById('pkg1Qty');
   if (qtyInput) qtyInput.value = '1';
-  if (modal) modal.classList.add('open');
-  if (overlay) overlay.classList.add('open');
+  if (overlay) {
+    overlay.style.display = 'block';
+    overlay.style.opacity = '1';
+  }
+  if (modal) {
+    modal.style.display = 'block';
+    modal.style.opacity = '1';
+    modal.style.transform = 'translate(-50%, -50%) scale(1)';
+  }
 }
 
 function closePackage1Selector() {
   const modal = document.getElementById('package1Modal');
   const overlay = document.getElementById('package1Overlay');
-  if (modal) modal.classList.remove('open');
-  if (overlay) overlay.classList.remove('open');
+  if (modal) { modal.style.display = 'none'; modal.style.opacity = '0'; }
+  if (overlay) { overlay.style.display = 'none'; overlay.style.opacity = '0'; }
 }
 
 function incrementPkg1Qty() {
@@ -632,15 +639,22 @@ function openPackage2Selector() {
   const overlay = document.getElementById('package2Overlay');
   const qtyInput = document.getElementById('pkg2Qty');
   if (qtyInput) qtyInput.value = '1';
-  if (modal) modal.classList.add('open');
-  if (overlay) overlay.classList.add('open');
+  if (overlay) {
+    overlay.style.display = 'block';
+    overlay.style.opacity = '1';
+  }
+  if (modal) {
+    modal.style.display = 'block';
+    modal.style.opacity = '1';
+    modal.style.transform = 'translate(-50%, -50%) scale(1)';
+  }
 }
 
 function closePackage2Selector() {
   const modal = document.getElementById('package2Modal');
   const overlay = document.getElementById('package2Overlay');
-  if (modal) modal.classList.remove('open');
-  if (overlay) overlay.classList.remove('open');
+  if (modal) { modal.style.display = 'none'; modal.style.opacity = '0'; }
+  if (overlay) { overlay.style.display = 'none'; overlay.style.opacity = '0'; }
 }
 
 function incrementPkg2Qty() {
