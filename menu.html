@@ -22,7 +22,6 @@
       <a href="about.html">About</a>
       <a href="reviews.html">Reviews</a>
       <a href="contact.html">Contact</a>
-      <a href="admin.html" class="nav-admin">Admin</a>
     </nav>
   </header>
 
@@ -203,6 +202,15 @@
         </article>
         <article class="menu-item">
           <div class="menu-item-image">
+            <img src="boiled egg.jpg" alt="Boiled Egg" />
+          </div>
+          <h3>Boiled Egg</h3>
+          <p>Fresh boiled egg — a simple, protein-rich add-on to any meal.</p>
+          <strong>₦200</strong>
+          <button class="add-to-order-btn" onclick="openQuantitySelector('Boiled Egg', 200)">Add to Order</button>
+        </article>
+        <article class="menu-item">
+          <div class="menu-item-image">
             <img src="beef.jpg" alt="Beef" />
           </div>
           <h3>Beef</h3>
@@ -281,6 +289,39 @@
           <p>Mixed meats and flavorful sides for a rich meal.</p>
           <strong>₦200</strong>
           <button class="add-to-order-btn" onclick="openQuantitySelector('Assorted Meat', 200)">Add to Order</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="menu-section special-packages-section">
+      <div class="section-header">
+        <span class="eyebrow">Special Packages</span>
+        <h2>Curated value meal bundles</h2>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-item package-item">
+          <h3>Ultimate Feast</h3>
+          <ul class="package-contents">
+            <li>3 scoops of Exclusive Jollof Rice</li>
+            <li>2 scoops of Exclusive Fried Rice</li>
+            <li>Plantain</li>
+            <li>Big Chicken with Coleslaw</li>
+          </ul>
+          <p class="package-subs">Exclusive Fried Rice can be replaced with Spaghetti. Coleslaw can be replaced with an extra scoop of rice, boiled egg, beef, or fish.</p>
+          <strong>₦2,500</strong>
+          <button class="add-to-order-btn" onclick="openPackage1Selector()">Add to Order</button>
+        </article>
+        <article class="menu-item package-item">
+          <h3>Campus Special</h3>
+          <ul class="package-contents">
+            <li>2 scoops of Exclusive Jollof Rice</li>
+            <li>1 scoop of Exclusive Fried Rice</li>
+            <li>Plantain</li>
+            <li>Chicken</li>
+          </ul>
+          <p class="package-subs">Exclusive Fried Rice can be replaced with Spaghetti.</p>
+          <strong>₦1,500</strong>
+          <button class="add-to-order-btn" onclick="openPackage2Selector()">Add to Order</button>
         </article>
       </div>
     </section>
@@ -509,6 +550,97 @@
   </div>
 
   <div id="eggOverlay" class="variant-overlay" onclick="closeEggSelector()"></div>
+
+  <div id="package1Modal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Ultimate Feast — ₦2,500</h2>
+        <button class="close-btn" onclick="closePackage1Selector()">✕</button>
+      </div>
+      <p class="package-modal-desc">Includes 3 scoops Jollof Rice + Big Chicken + Plantain. Select your options below:</p>
+      <div class="variant-options">
+        <p class="variant-group-label">Rice option (2 scoops):</p>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Rice" value="Exclusive Fried Rice" checked />
+          <span>Exclusive Fried Rice</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Rice" value="Spaghetti" />
+          <span>Spaghetti</span>
+        </label>
+      </div>
+      <div class="variant-options pkg-side-options">
+        <p class="variant-group-label">Side option (replace Coleslaw):</p>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Side" value="Coleslaw" checked />
+          <span>Coleslaw (default)</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Side" value="Extra Scoop of Rice" />
+          <span>Extra Scoop of Rice</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Side" value="Boiled Egg" />
+          <span>Boiled Egg</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Side" value="Beef" />
+          <span>Beef</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="pkg1Side" value="Fish" />
+          <span>Fish</span>
+        </label>
+      </div>
+      <div class="variant-quantity">
+        <label for="pkg1Qty">Quantity</label>
+        <div class="qty-input-group">
+          <button type="button" class="qty-btn" onclick="decrementPkg1Qty()">−</button>
+          <input type="number" id="pkg1Qty" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementPkg1Qty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addPackage1ToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closePackage1Selector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div id="package1Overlay" class="variant-overlay" onclick="closePackage1Selector()"></div>
+
+  <div id="package2Modal" class="variant-modal">
+    <div class="variant-modal-content">
+      <div class="variant-modal-header">
+        <h2>Campus Special — ₦1,500</h2>
+        <button class="close-btn" onclick="closePackage2Selector()">✕</button>
+      </div>
+      <p class="package-modal-desc">Includes 2 scoops Jollof Rice + Chicken + Plantain. Select your option below:</p>
+      <div class="variant-options">
+        <p class="variant-group-label">Rice option (1 scoop):</p>
+        <label class="variant-option">
+          <input type="radio" name="pkg2Rice" value="Exclusive Fried Rice" checked />
+          <span>Exclusive Fried Rice</span>
+        </label>
+        <label class="variant-option">
+          <input type="radio" name="pkg2Rice" value="Spaghetti" />
+          <span>Spaghetti</span>
+        </label>
+      </div>
+      <div class="variant-quantity">
+        <label for="pkg2Qty">Quantity</label>
+        <div class="qty-input-group">
+          <button type="button" class="qty-btn" onclick="decrementPkg2Qty()">−</button>
+          <input type="number" id="pkg2Qty" value="1" min="1" />
+          <button type="button" class="qty-btn" onclick="incrementPkg2Qty()">+</button>
+        </div>
+      </div>
+      <div class="variant-actions">
+        <button class="btn btn-primary" onclick="addPackage2ToCart()">Add to Order</button>
+        <button class="btn btn-secondary" onclick="closePackage2Selector()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div id="package2Overlay" class="variant-overlay" onclick="closePackage2Selector()"></div>
 
   <div id="floatingCart" class="floating-cart">
     <span class="cart-icon">🛒</span>

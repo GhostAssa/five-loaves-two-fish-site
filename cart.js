@@ -573,3 +573,98 @@ function addEggToCart() {
   const qtyInput = document.getElementById('eggQty');
   if (qtyInput) qtyInput.value = '1';
 }
+
+// Package 1 — Ultimate Feast Selector
+function openPackage1Selector() {
+  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Package 1: Ultimate Feast')) {
+    alert('Sorry, this package is currently unavailable.');
+    return;
+  }
+  const modal = document.getElementById('package1Modal');
+  const overlay = document.getElementById('package1Overlay');
+  const qtyInput = document.getElementById('pkg1Qty');
+  if (qtyInput) qtyInput.value = '1';
+  if (modal) modal.classList.add('open');
+  if (overlay) overlay.classList.add('open');
+}
+
+function closePackage1Selector() {
+  const modal = document.getElementById('package1Modal');
+  const overlay = document.getElementById('package1Overlay');
+  if (modal) modal.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function incrementPkg1Qty() {
+  const input = document.getElementById('pkg1Qty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) + 1);
+}
+
+function decrementPkg1Qty() {
+  const input = document.getElementById('pkg1Qty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
+}
+
+function addPackage1ToCart() {
+  const rice = document.querySelector('input[name="pkg1Rice"]:checked');
+  const side = document.querySelector('input[name="pkg1Side"]:checked');
+  const qty = parseInt(document.getElementById('pkg1Qty').value, 10) || 1;
+  if (!rice || !side) {
+    alert('Please make your selections');
+    return;
+  }
+  const itemName = `Package 1: Ultimate Feast (${rice.value} + ${side.value})`;
+  addToCart(itemName, 2500, qty);
+  closePackage1Selector();
+  const qtyInput = document.getElementById('pkg1Qty');
+  if (qtyInput) qtyInput.value = '1';
+}
+
+// Package 2 — Campus Special Selector
+function openPackage2Selector() {
+  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Package 2: Campus Special')) {
+    alert('Sorry, this package is currently unavailable.');
+    return;
+  }
+  const modal = document.getElementById('package2Modal');
+  const overlay = document.getElementById('package2Overlay');
+  const qtyInput = document.getElementById('pkg2Qty');
+  if (qtyInput) qtyInput.value = '1';
+  if (modal) modal.classList.add('open');
+  if (overlay) overlay.classList.add('open');
+}
+
+function closePackage2Selector() {
+  const modal = document.getElementById('package2Modal');
+  const overlay = document.getElementById('package2Overlay');
+  if (modal) modal.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+}
+
+function incrementPkg2Qty() {
+  const input = document.getElementById('pkg2Qty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) + 1);
+}
+
+function decrementPkg2Qty() {
+  const input = document.getElementById('pkg2Qty');
+  if (!input) return;
+  input.value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
+}
+
+function addPackage2ToCart() {
+  const rice = document.querySelector('input[name="pkg2Rice"]:checked');
+  const qty = parseInt(document.getElementById('pkg2Qty').value, 10) || 1;
+  if (!rice) {
+    alert('Please make your selection');
+    return;
+  }
+  const itemName = `Package 2: Campus Special (${rice.value})`;
+  addToCart(itemName, 1500, qty);
+  closePackage2Selector();
+  const qtyInput = document.getElementById('pkg2Qty');
+  if (qtyInput) qtyInput.value = '1';
+}

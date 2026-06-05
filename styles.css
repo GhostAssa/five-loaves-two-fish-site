@@ -1193,3 +1193,49 @@ select {
   }
 }
 
+/* Special Packages */
+.special-packages-section {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-top: 3px solid var(--primary);
+}
+
+.package-item {
+  border: 2px solid rgba(255, 111, 0, 0.2);
+}
+
+.package-contents {
+  margin: 0.5rem 0 0.75rem;
+  padding-left: 1.2rem;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.package-contents li {
+  margin-bottom: 0.3rem;
+}
+
+.package-subs {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}
+
+.package-modal-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: -0.5rem 0 1rem;
+}
+
+.variant-group-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+}
+
+.pkg-side-options {
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem;
+}
+

@@ -7,7 +7,9 @@
     'Exclusive Fried Rice',
     'Stir Fry Spag',
     'Special Noodles',
+    'Boiled Yam',
     'Hot Moi Moi',
+    'Beans',
     'Coleslaw',
     'Ewedu',
     'Gbegiri',
@@ -16,14 +18,18 @@
     'Efo Riro',
     'Okra',
     'Stew',
-    'Egg',
+    'Fried Egg',
+    'Boiled Egg',
     'Beef',
     'Fish',
     'Chicken',
+    'Bread',
     'Goat Meat',
     'Ponmo',
     'Plantain',
-    'Assorted'
+    'Assorted Meat',
+    'Package 1: Ultimate Feast',
+    'Package 2: Campus Special'
   ];
 
   function normalizeItemName(name) {
@@ -31,6 +37,10 @@
     if (name.startsWith('Swallow (')) return 'Swallow';
     if (name.startsWith('Fish (')) return 'Fish';
     if (name.startsWith('Chicken (')) return 'Chicken';
+    if (name.startsWith('Bread (')) return 'Bread';
+    if (name.startsWith('Fried Egg (')) return 'Fried Egg';
+    if (name.startsWith('Package 1:')) return 'Package 1: Ultimate Feast';
+    if (name.startsWith('Package 2:')) return 'Package 2: Campus Special';
     if (name.startsWith('Ewedu Soup')) return 'Ewedu';
     if (name.startsWith('Gbegiri Soup')) return 'Gbegiri';
     if (name.startsWith('Abula Soup')) return 'Abula';
@@ -141,7 +151,6 @@
       applyMenuAvailabilityState();
     }
 
-    // Password visibility toggle
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('adminPassword');
     if (togglePassword && passwordInput) {
