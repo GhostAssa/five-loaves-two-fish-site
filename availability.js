@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'flffAvailability';
-  const API_URL = '/api/availability';
+  const API_URL = 'https://five-loaves-two-fish.vercel.app/api/availability';
 
   const MENU_ITEMS = [
     'Exclusive White Rice',
