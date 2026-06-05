@@ -576,10 +576,6 @@ function addEggToCart() {
 
 // Package 1 — Ultimate Feast Selector
 function openPackage1Selector() {
-  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Package 1: Ultimate Feast')) {
-    alert('Sorry, this package is currently unavailable.');
-    return;
-  }
   const modal = document.getElementById('package1Modal');
   const overlay = document.getElementById('package1Overlay');
   const qtyInput = document.getElementById('pkg1Qty');
@@ -631,10 +627,6 @@ function addPackage1ToCart() {
 
 // Package 2 — Campus Special Selector
 function openPackage2Selector() {
-  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Package 2: Campus Special')) {
-    alert('Sorry, this package is currently unavailable.');
-    return;
-  }
   const modal = document.getElementById('package2Modal');
   const overlay = document.getElementById('package2Overlay');
   const qtyInput = document.getElementById('pkg2Qty');
