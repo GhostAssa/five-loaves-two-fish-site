@@ -181,10 +181,21 @@ h1 {
 
 .hero-image img {
   border-radius: 28px;
-  max-height: 560px;
-  object-fit: cover;
   width: 100%;
+  height: auto;
+  display: block;
   box-shadow: var(--shadow);
+}
+
+.hero-image .hero-logo {
+  border-radius: 24px;
+  width: 100%;
+  height: auto;
+  max-width: 420px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 30px 80px rgba(198, 40, 40, 0.35), 0 8px 24px rgba(0,0,0,0.15);
+  filter: drop-shadow(0 4px 24px rgba(198, 40, 40, 0.25));
 }
 
 .highlights,
@@ -685,8 +696,13 @@ select {
 
   .hero-image img {
     margin-top: 1rem;
-    max-height: 250px;
-    object-fit: cover;
+    height: auto;
+    max-height: none;
+  }
+
+  .hero-image .hero-logo {
+    max-width: 280px;
+    margin: 1rem auto 0;
   }
 
   .section-header {
