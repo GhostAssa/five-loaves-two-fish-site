@@ -1,9 +1,6 @@
 (function () {
   const STORAGE_KEY = 'flffAvailability';
-
-  // Shared cross-device availability store (jsonblob.com — free, no login)
-  // This lets admin changes on any device instantly affect the customer menu.
-  const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/019e956a-e162-77d5-9400-4a48d15e920a';
+  const API_URL = '/api/availability';
 
   const MENU_ITEMS = [
     'Exclusive White Rice',
@@ -66,20 +63,20 @@
 
   function saveAvailabilityMap(map) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
-    pushToBlob(map);
+    pushToAPI(map);
   }
 
-  function pushToBlob(map) {
-    fetch(BLOB_URL, {
+  function pushToAPI(map) {
+    fetch(API_URL, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(map)
     }).catch(() => {});
   }
 
-  // Pull latest state from the shared blob, update localStorage, then call callback
-  function syncFromBlob(callback) {
-    fetch(BLOB_URL)
+  // Fetch latest state from the server, update localStorage, then run callback
+  function syncFromAPI(callback) {
+    fetch(API_URL)
       .then(r => (r.ok ? r.json() : null))
       .then(data => {
         if (data && typeof data === 'object') {
@@ -173,13 +170,12 @@
     applyMenuAvailabilityState,
     renderAdminList,
     setAllAvailability,
-    syncFromBlob,
+    syncFromAPI,
   };
 
   document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.menu-item')) {
-      // Pull latest availability from shared store before rendering menu
-      syncFromBlob(() => applyMenuAvailabilityState());
+      syncFromAPI(() => applyMenuAvailabilityState());
     }
 
     const togglePassword = document.getElementById('togglePassword');
