@@ -41,8 +41,8 @@
     if (name.startsWith('Chicken (')) return 'Chicken';
     if (name.startsWith('Bread (')) return 'Bread';
     if (name.startsWith('Fried Egg (')) return 'Fried Egg';
-    if (name.startsWith('Package 1:')) return 'Package 1: Ultimate Feast';
-    if (name.startsWith('Package 2:')) return 'Package 2: Campus Special';
+    if (name === 'Ultimate Feast' || name.startsWith('Package 1:')) return 'Package 1: Ultimate Feast';
+    if (name === 'Campus Special' || name.startsWith('Package 2:')) return 'Package 2: Campus Special';
     if (name.startsWith('Ewedu Soup')) return 'Ewedu';
     if (name.startsWith('Gbegiri Soup')) return 'Gbegiri';
     if (name.startsWith('Abula Soup')) return 'Abula';
