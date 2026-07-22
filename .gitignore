@@ -4,3 +4,4 @@ Desktop.ini
 
 # Installers accidentally in project folder
 *.exe
+.vercel
