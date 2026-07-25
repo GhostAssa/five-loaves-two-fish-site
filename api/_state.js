@@ -1,9 +1,10 @@
+const fs = require('fs');
+const path = require('path');
 const crypto = require('crypto');
-const { createClient } = require('@vercel/kv');
 
-const kv = createClient();
-const AUTH_KEY = 'flff-admin-auth';
-const AVAILABILITY_KEY = 'flff-availability';
+const DATA_DIR = '/tmp';
+const AVAILABILITY_FILE = path.join(DATA_DIR, 'flff-availability.json');
+const AUTH_FILE = path.join(DATA_DIR, 'flff-auth.json');
 
 const DEFAULTS = {
   'Exclusive White Rice': true,
@@ -54,8 +55,20 @@ function verifyPassword(password, stored) {
   return crypto.timingSafeEqual(Buffer.from(hash, 'hex'), Buffer.from(computed, 'hex'));
 }
 
+function readJsonFile(filePath, fallback) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch {
+    return fallback;
+  }
+}
+
+function writeJsonFile(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data));
+}
+
 async function getAuthState() {
-  const stored = await kv.get(AUTH_KEY);
+  const stored = readJsonFile(AUTH_FILE, null);
   if (stored && stored.username && stored.passwordHash) {
     return stored;
   }
@@ -65,21 +78,20 @@ async function getAuthState() {
     passwordHash: hashPassword(DEFAULT_ADMIN_PASSWORD),
     sessions: {}
   };
-  await kv.set(AUTH_KEY, newAuth);
+  writeJsonFile(AUTH_FILE, newAuth);
   return newAuth;
 }
 
 async function setAuthState(auth) {
-  await kv.set(AUTH_KEY, auth);
+  writeJsonFile(AUTH_FILE, auth);
 }
 
 async function getAvailability() {
-  const stored = await kv.get(AVAILABILITY_KEY);
-  return stored || DEFAULTS;
+  return readJsonFile(AVAILABILITY_FILE, DEFAULTS);
 }
 
 async function setAvailability(data) {
-  await kv.set(AVAILABILITY_KEY, data);
+  writeJsonFile(AVAILABILITY_FILE, data);
 }
 
 function generateSessionToken() {

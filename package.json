@@ -1,8 +1,5 @@
 {
   "name": "five-loaves-two-fish",
   "private": true,
-  "type": "commonjs",
-  "dependencies": {
-    "@vercel/kv": "^1.0.0"
-  }
+  "type": "commonjs"
 }
