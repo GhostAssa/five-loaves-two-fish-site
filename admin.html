@@ -85,27 +85,9 @@
 
   <script src="availability.js"></script>
   <script>
-    const ADMIN_USERNAME = 'LoavesandFish';
-    const DEFAULT_PASSWORD = 'Fedwithfiveandtwo5000';
-    const PASSWORD_STORAGE_KEY = 'flffAdminPasswordHash';
-    const SESSION_STORAGE_KEY = 'flffAdminSession';
-
-    async function hashText(text) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(text);
-      const digest = await crypto.subtle.digest('SHA-256', data);
-      return Array.from(new Uint8Array(digest))
-        .map(byte => byte.toString(16).padStart(2, '0'))
-        .join('');
-    }
-
-    async function getStoredPasswordHash() {
-      const existing = localStorage.getItem(PASSWORD_STORAGE_KEY);
-      if (existing) return existing;
-      const defaultHash = await hashText(DEFAULT_PASSWORD);
-      localStorage.setItem(PASSWORD_STORAGE_KEY, defaultHash);
-      return defaultHash;
-    }
+    const AUTH_API_URL = '/api/auth';
+    const PASSWORD_API_URL = '/api/password';
+    const SESSION_STORAGE_KEY = 'flffAdminSessionToken';
 
     function setMessage(el, text, isError) {
       if (!el) return;
@@ -121,18 +103,35 @@
       adminControls.style.display = isAuthenticated ? 'block' : 'none';
     }
 
-    async function initializeAdmin() {
-      if (!window.DishAvailability) return;
-      await getStoredPasswordHash();
+    function getToken() {
+      return sessionStorage.getItem(SESSION_STORAGE_KEY) || '';
+    }
 
-      // Pull latest availability from shared store before showing the panel
-      window.DishAvailability.syncFromAPI(() => {
-        const isAuthenticated = sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
-        toggleAdminView(isAuthenticated);
-        if (isAuthenticated) {
-          window.DishAvailability.renderAdminList('adminItems');
+    window.AdminAuth = {
+      getToken,
+    };
+
+    async function authenticateSession() {
+      const token = getToken();
+      if (!token) return false;
+
+      const response = await fetch(AUTH_API_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         }
       });
+      return response.ok;
+    }
+
+    async function initializeAdmin() {
+      if (!window.DishAvailability) return;
+      const isAuthenticated = await authenticateSession();
+      toggleAdminView(isAuthenticated);
+      if (isAuthenticated) {
+        window.DishAvailability.renderAdminList('adminItems');
+      }
 
       document.getElementById('allAvailableBtn')?.addEventListener('click', () => {
         window.DishAvailability.setAllAvailability(true);
@@ -156,18 +155,19 @@
         const password = document.getElementById('adminPassword').value;
         const loginMessage = document.getElementById('loginMessage');
 
-        if (username !== ADMIN_USERNAME) {
+        const response = await fetch(AUTH_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        if (!response.ok) {
           setMessage(loginMessage, 'Invalid username or password.', true);
           return;
         }
 
-        const [enteredHash, storedHash] = await Promise.all([hashText(password), getStoredPasswordHash()]);
-        if (enteredHash !== storedHash) {
-          setMessage(loginMessage, 'Invalid username or password.', true);
-          return;
-        }
-
-        sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+        const { token } = await response.json();
+        sessionStorage.setItem(SESSION_STORAGE_KEY, token);
         toggleAdminView(true);
         window.DishAvailability.renderAdminList('adminItems');
         setMessage(loginMessage, '');
@@ -190,14 +190,27 @@
           return;
         }
 
-        const [currentHash, storedHash] = await Promise.all([hashText(currentPassword), getStoredPasswordHash()]);
-        if (currentHash !== storedHash) {
-          setMessage(passwordMessage, 'Current password is incorrect.', true);
+        const token = getToken();
+        if (!token) {
+          setMessage(passwordMessage, 'You must be logged in to change the password.', true);
           return;
         }
 
-        const newHash = await hashText(newPassword);
-        localStorage.setItem(PASSWORD_STORAGE_KEY, newHash);
+        const response = await fetch(PASSWORD_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ currentPassword, newPassword })
+        });
+
+        if (!response.ok) {
+          const payload = await response.json().catch(() => ({}));
+          setMessage(passwordMessage, payload.error || 'Unable to update password.', true);
+          return;
+        }
+
         setMessage(passwordMessage, 'Password updated successfully.', false);
         event.target.reset();
       });

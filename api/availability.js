@@ -1,65 +1,28 @@
-const fs = require('fs');
+const { getAvailability, setAvailability, verifyToken, setCorsHeaders } = require('./_state');
 
-const DATA_FILE = '/tmp/flff-availability.json';
-
-const DEFAULTS = {
-  'Exclusive White Rice': true,
-  'Swallow': true,
-  'Exclusive Jollof Rice': true,
-  'Exclusive Fried Rice': true,
-  'Stir Fry Spag': true,
-  'Special Noodles': true,
-  'Boiled Yam': true,
-  'Hot Moi Moi': true,
-  'Beans': true,
-  'Coleslaw': true,
-  'Ewedu': true,
-  'Gbegiri': true,
-  'Abula': true,
-  'Egusi': true,
-  'Efo Riro': true,
-  'Okra': true,
-  'Stew': true,
-  'Fried Egg': true,
-  'Boiled Egg': true,
-  'Beef': true,
-  'Fish': true,
-  'Chicken': true,
-  'Bread': true,
-  'Goat Meat': true,
-  'Ponmo': true,
-  'Plantain': true,
-  'Assorted Meat': true,
-  'Package 1: Ultimate Feast': true,
-  'Package 2: Campus Special': true
-};
-
-function readData() {
-  try {
-    return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-  } catch {
-    return { ...DEFAULTS };
-  }
-}
-
-function writeData(data) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data));
-}
-
-module.exports = function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+module.exports = async function handler(req, res) {
+  setCorsHeaders(res, ['GET', 'PUT', 'OPTIONS']);
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   if (req.method === 'GET') {
-    return res.status(200).json(readData());
+    const data = await getAvailability();
+    return res.status(200).json(data);
   }
 
   if (req.method === 'PUT') {
+    const token = req.headers.authorization?.replace(/^Bearer\s+/i, '') || req.headers.cookie;
+    const session = await verifyToken(token);
+    if (!session || !session.authenticated) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    if (!req.body || typeof req.body !== 'object') {
+      return res.status(400).json({ error: 'Invalid availability payload.' });
+    }
+
     try {
-      writeData(req.body);
+      await setAvailability(req.body);
       return res.status(200).json({ ok: true });
     } catch (e) {
       return res.status(500).json({ error: e.message });

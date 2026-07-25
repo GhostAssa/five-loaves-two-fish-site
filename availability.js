@@ -1,6 +1,6 @@
 (function () {
   const STORAGE_KEY = 'flffAvailability';
-  const API_URL = 'https://five-loaves-two-fish.vercel.app/api/availability';
+  const API_URL = '/api/availability';
 
   const MENU_ITEMS = [
     'Exclusive White Rice',
@@ -66,10 +66,20 @@
     pushToAPI(map);
   }
 
+  function getAdminAuthToken() {
+    return window.AdminAuth?.getToken?.() || '';
+  }
+
   function pushToAPI(map) {
+    const token = getAdminAuthToken();
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
     fetch(API_URL, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify(map)
     }).catch(() => {});
   }
