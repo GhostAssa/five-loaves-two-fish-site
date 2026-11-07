@@ -3,137 +3,324 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Five Loaves & Two Fish | Nigerian Campus Restaurant</title>
+  <title>Five Loaves & Two Fish — Nigerian Campus Meals</title>
+  <meta name="description" content="Five Loaves &amp; Two Fish — fresh Nigerian campus meals from Queen Idia Hall, University of Ibadan. Order online and get it delivered on UI campus." />
+  <meta name="theme-color" content="#C80908" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html">
-      <img src="images/5.png" alt="Five Loaves & Two Fish logo" />
-      <span>Five Loaves & Two Fish</span>
+
+<header class="nav-wrap">
+  <nav class="nav" id="mainNav" aria-label="Main">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo-tile"><img src="images/logo-mark.png" alt="" width="40" height="40" /></span>
+      <span class="nav-brand-name">Five Loaves &amp; Two Fish</span>
     </a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="order.html">Order</a>
-      <a href="about.html">About</a>
-      <a href="reviews.html">Reviews</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/2348030735623" target="_blank" rel="noopener">Order Now</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNavPanel">☰</button>
+  </nav>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Fresh campus meals at Queen Idia Hall</p>
-        <h1>Delicious Nigerian Meals, Served Fresh Daily.</h1>
-        <p class="intro">Affordable dishes, quick delivery, right at Queen Idia Hall, UI.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="order.html">Order Now</a>
-          <a class="btn btn-secondary" href="menu.html">View Menu</a>
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<nav class="mobile-nav-panel" id="mobileNavPanel" aria-label="Mobile">
+  <button class="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
+  <a href="index.html" class="active" aria-current="page">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="order.html">Order</a>
+  <a href="about.html">About</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://wa.me/2348030735623" class="nav-cta" target="_blank" rel="noopener">Order Now</a>
+</nav>
+
+<main class="site-panel">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-text">
+      <h1 class="hero-headline">Delicious Nigerian<br>meals, served<br>fresh daily.</h1>
+      <p class="hero-sub">Homemade soups, jollof rice, hearty swallow, and more — cooked fresh and delivered across UI campus from Queen Idia Hall.</p>
+      <a href="menu.html" class="btn-hero-outline">See the menu</a>
+      <p class="scroll-cue" aria-hidden="true">↓ Scroll to explore</p>
+    </div>
+
+    <div class="hero-media">
+      <div class="hero-photo-wrap">
+        <img src="jollof meal o.jpg" alt="A plate of jollof rice and chicken" width="700" height="560" fetchpriority="high" />
+        <div class="hero-card hero-card-1" aria-hidden="true">
+          <div class="hcard-row">
+            <span class="hcard-icon">🥘</span>
+            <span class="hcard-dot"></span>
+          </div>
+          <strong>Ultimate Feast</strong>
+          <span>₦2,500</span>
         </div>
-      </div>
-      <div class="hero-image">
-        <img src="images/5.png" alt="Five Loaves & Two Fish logo" class="hero-logo" />
-      </div>
-    </section>
-
-    <section class="highlights grid-3">
-      <article>
-        <span class="icon">🍲</span>
-        <h2>Authentic Flavors</h2>
-        <p>Fresh stews, rice, and proteins made with home-style seasonings.</p>
-      </article>
-      <article>
-        <span class="icon">⚡</span>
-        <h2>Quick Delivery</h2>
-        <p>Campus delivery service within Queen Idia Hall so you get food fast.</p>
-      </article>
-      <article>
-        <span class="icon">💰</span>
-        <h2>Affordable Meals</h2>
-        <p>Student-friendly prices with generous portions and variety.</p>
-      </article>
-    </section>
-
-    <section class="menu-preview">
-      <div class="section-header">
-        <span class="eyebrow">Featured Menu</span>
-        <h2>Campus favorites you can order today</h2>
-      </div>
-      <div class="menu-grid">
-        <article class="menu-card">
-          <h3>Exclusive Jollof Rice</h3>
-          <p>Rich tomato rice served fresh and affordable.</p>
-          <strong>₦250</strong>
-        </article>
-        <article class="menu-card">
-          <h3>Special Noodles</h3>
-          <p>Signature noodles with mixed vegetables and savory spices.</p>
-          <strong>₦1,500</strong>
-        </article>
-        <article class="menu-card">
-          <h3>Egg</h3>
-          <p>Protein-packed egg add-on for any dish or soup.</p>
-          <strong>₦250</strong>
-        </article>
-      </div>
-      <div class="hero-actions center">
-        <a class="btn btn-primary" href="menu.html">Explore Full Menu</a>
-      </div>
-    </section>
-
-    <section class="story-block">
-      <div>
-        <h2>More than food, it’s community</h2>
-        <p>Five Loaves & Two Fish brings authentic Nigerian flavors to students and locals at UI. We honor tradition with every meal, using fresh ingredients and warm service so your campus dining feels like home.</p>
-      </div>
-      <div class="photo-grid">
-        <img src="jollof meal o.jpg" alt="Jollof rice meal" />
-        <img src="white rice meal.jpg" alt="White rice meal" />
-        <img src="noodles meal.jpg" alt="Noodles meal" />
-        <img src="swallow meal o.jpg" alt="Swallow meal" />
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Queen Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
-  </footer>
-
-  <div id="floatingCart" class="floating-cart">
-    <span class="cart-icon">🛒</span>
-    <span id="cartItemCount" class="cart-count"></span>
-  </div>
-
-  <div id="cartModal" class="cart-modal">
-    <div class="cart-modal-content">
-      <div class="cart-modal-header">
-        <h2>Your Order</h2>
-        <button id="closeCartModal" class="close-btn">✕</button>
-      </div>
-      <div id="cartItems" class="cart-items"></div>
-      <div class="cart-modal-footer">
-        <div class="total-row">
-          <strong>Total:</strong>
-          <strong id="cartTotal">₦0</strong>
+        <div class="hero-card hero-card-2" aria-hidden="true">
+          <div class="hcard-row">
+            <span class="hcard-icon">🍚</span>
+            <span class="hcard-dot"></span>
+          </div>
+          <strong>Jollof Rice</strong>
+          <span>₦250</span>
         </div>
-        <label for="orderName">Your Name</label>
-        <input id="orderName" type="text" placeholder="Your name" />
-        <label for="orderPhone">Phone Number</label>
-        <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" />
-        <label for="orderLocation">Delivery Location</label>
-        <input id="orderLocation" type="text" placeholder="Queen Idia Hall, University of Ibadan" value="Queen Idia Hall, University of Ibadan" />
-        <button class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
-        <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+        <div class="hero-card hero-card-3" aria-hidden="true">
+          <div class="hcard-row">
+            <span class="hcard-icon">🍜</span>
+            <span class="hcard-dot"></span>
+          </div>
+          <strong>Special Noodles</strong>
+          <span>₦1,500</span>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <script src="cart.js"></script>
-  <script src="script.js"></script>
+  <!-- HOW TO ORDER -->
+  <section class="process-section" id="process">
+    <h2 class="process-headline">How to order<br>in minutes</h2>
+    <ol class="process-list">
+      <li class="process-item">
+        <div class="process-num" aria-hidden="true">01</div>
+        <div>
+          <strong>Browse the menu</strong>
+          <p>Head to our menu page and tap "Add to Order" on any dish you would like.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-num" aria-hidden="true">02</div>
+        <div>
+          <strong>Open your cart</strong>
+          <p>Tap the cart button at the bottom right of your screen to review your items.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-num" aria-hidden="true">03</div>
+        <div>
+          <strong>Fill in your details</strong>
+          <p>Enter your name, phone number, and delivery location on campus.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-num" aria-hidden="true">04</div>
+        <div>
+          <strong>Send via WhatsApp</strong>
+          <p>Tap "Send Order to WhatsApp" — your full order goes directly to our team.</p>
+        </div>
+      </li>
+      <li class="process-item">
+        <div class="process-num" aria-hidden="true">05</div>
+        <div>
+          <strong>We confirm and deliver</strong>
+          <p>We reply with payment details and bring your meal hot to your door.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- FEATURED DISHES -->
+  <section class="feat-section" id="featured">
+    <div class="feat-header">
+      <h2>What we're<br>cooking today</h2>
+      <a href="menu.html" class="feat-all-link">See full menu</a>
+    </div>
+    <div class="feat-cards">
+      <article class="feat-card">
+        <div class="feat-card-cap cap-teal"></div>
+        <div class="feat-card-img">
+          <img src="jollof meal o.jpg" alt="Ultimate Feast — jollof rice, chicken and plantain" loading="lazy" width="400" height="200" />
+        </div>
+        <div class="feat-card-body">
+          <h3>Ultimate Feast</h3>
+          <p>3 scoops of jollof rice, big chicken, plantain, and your choice of side. The complete meal.</p>
+          <a href="menu.html#packages" class="feat-card-link">View on menu</a>
+        </div>
+      </article>
+      <article class="feat-card">
+        <div class="feat-card-cap cap-gold"></div>
+        <div class="feat-card-img">
+          <img src="jollof meal o.jpg" alt="Exclusive jollof rice" loading="lazy" width="400" height="200" />
+        </div>
+        <div class="feat-card-body">
+          <h3>Exclusive Jollof Rice</h3>
+          <p>Rich tomato-based rice cooked with spices and a savory finish. A campus favourite, every day.</p>
+          <a href="menu.html#dishes" class="feat-card-link">View on menu</a>
+        </div>
+      </article>
+      <article class="feat-card">
+        <div class="feat-card-cap cap-lavender"></div>
+        <div class="feat-card-img">
+          <img src="noodles meal.jpg" alt="Special noodles" loading="lazy" width="400" height="200" />
+        </div>
+        <div class="feat-card-body">
+          <h3>Special Noodles</h3>
+          <p>Signature noodles cooked with vegetables and your choice of protein. Hearty and satisfying.</p>
+          <a href="menu.html#dishes" class="feat-card-link">View on menu</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION -->
+  <section class="accordion-section" id="faq">
+    <div class="accordion-wrap">
+      <h2 class="accordion-headline">Questions<br>answered.</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" id="faq-1-btn" aria-expanded="false" aria-controls="faq-1">
+            <span class="accordion-plus" aria-hidden="true">+</span>
+            How do I place an order?
+          </button>
+          <div id="faq-1" class="accordion-body" role="region" aria-labelledby="faq-1-btn">
+            <div class="accordion-body-inner">Browse our menu, add dishes to your cart, then tap the cart icon. Fill in your name, phone, and delivery location and hit "Send Order to WhatsApp" — your order arrives directly to our team. We confirm in minutes.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" id="faq-2-btn" aria-expanded="false" aria-controls="faq-2">
+            <span class="accordion-plus" aria-hidden="true">+</span>
+            Where exactly are you located?
+          </button>
+          <div id="faq-2" class="accordion-body" role="region" aria-labelledby="faq-2-btn">
+            <div class="accordion-body-inner">We operate from Queen Idia Hall, University of Ibadan. You can walk in or order online for delivery anywhere across the UI campus.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" id="faq-3-btn" aria-expanded="false" aria-controls="faq-3">
+            <span class="accordion-plus" aria-hidden="true">+</span>
+            Do you deliver across the whole of UI campus?
+          </button>
+          <div id="faq-3" class="accordion-body" role="region" aria-labelledby="faq-3-btn">
+            <div class="accordion-body-inner">Yes — we deliver across the University of Ibadan campus. Delivery fee is ₦300 and packaging is ₦200. Specify your exact location when you place your order and we will find you.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" id="faq-4-btn" aria-expanded="false" aria-controls="faq-4">
+            <span class="accordion-plus" aria-hidden="true">+</span>
+            Can I customise my meal?
+          </button>
+          <div id="faq-4" class="accordion-body" role="region" aria-labelledby="faq-4-btn">
+            <div class="accordion-body-inner">Absolutely. Our packages let you swap sides — for example, swap coleslaw in the Ultimate Feast for an extra scoop of rice, a boiled egg, beef, or fish. You can also mix proteins and add-ons from the menu freely.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button type="button" class="accordion-trigger" id="faq-5-btn" aria-expanded="false" aria-controls="faq-5">
+            <span class="accordion-plus" aria-hidden="true">+</span>
+            Is everything cooked fresh each day?
+          </button>
+          <div id="faq-5" class="accordion-body" role="region" aria-labelledby="faq-5-btn">
+            <div class="accordion-body-inner">Yes. We cook everything fresh daily using quality local ingredients and traditional recipes. No reheated meals, no compromises. Call or WhatsApp us to ask what is ready right now.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER FORM -->
+  <section class="order-form-section" id="order-form">
+    <h2>Ready to order?</h2>
+    <p>Tell us what you want and we will confirm via WhatsApp in minutes.</p>
+    <form class="order-form-grid" id="directOrderForm" onsubmit="submitDirectOrder(event)">
+      <div class="form-field">
+        <label for="directName">Your name *</label>
+        <input type="text" id="directName" required placeholder="Ada Okafor" autocomplete="name" />
+      </div>
+      <div class="form-field">
+        <label for="directPhone">Phone number *</label>
+        <input type="tel" id="directPhone" required placeholder="+2348030xxxxxx" autocomplete="tel" />
+      </div>
+      <div class="form-field form-field-full">
+        <label for="directLocation">Delivery location *</label>
+        <input type="text" id="directLocation" required value="Queen Idia Hall, University of Ibadan" />
+      </div>
+      <div class="form-field form-field-full">
+        <label for="directItems">What would you like? *</label>
+        <textarea id="directItems" rows="3" required placeholder="e.g. 2× Jollof Rice, 1× Chicken, 1× Campus Special"></textarea>
+      </div>
+      <div class="form-submit-wrap">
+        <button type="submit" class="btn-dark-pill">Send order</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-brand-block">
+        <span class="footer-logo-tile"><img src="images/logo-mark.png" alt="" width="36" height="36" /></span>
+        <span class="footer-brand-name">Five Loaves &amp; Two Fish</span>
+      </a>
+      <nav class="footer-links-group" aria-label="Footer">
+        <div class="footer-col">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="order.html">Order</a>
+        </div>
+        <div class="footer-col">
+          <a href="about.html">About</a>
+          <a href="reviews.html">Reviews</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <a href="https://wa.me/2348030735623" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="tel:+2348030735623">+234 803 073 5623</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bar">
+      <span>© <span data-year>2026</span> Five Loaves &amp; Two Fish · Queen Idia Hall, University of Ibadan</span>
+      <a href="admin.html" class="footer-admin">staff</a>
+    </div>
+  </footer>
+
+</main>
+
+<button type="button" id="floatingCart" class="floating-cart" aria-label="Open your order">
+  <span class="cart-icon" aria-hidden="true">🛒</span>
+  <span id="cartItemCount" class="cart-count"></span>
+</button>
+
+<div id="cartModal" class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="cart-modal-content">
+    <div class="cart-modal-header">
+      <h2 id="cartTitle">Your Order</h2>
+      <button type="button" id="closeCartModal" class="close-btn" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-modal-footer">
+      <div class="total-row">
+        <span class="total-text">Total incl. delivery (₦300) + pack (₦200)</span>
+        <strong id="cartTotal">₦0</strong>
+      </div>
+      <label for="orderName">Your name</label>
+      <input id="orderName" type="text" placeholder="Your name" autocomplete="name" />
+      <label for="orderPhone">Phone number</label>
+      <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" autocomplete="tel" />
+      <label for="orderLocation">Delivery location</label>
+      <input id="orderLocation" type="text" value="Queen Idia Hall, University of Ibadan" />
+      <button type="button" class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
+      <button type="button" class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+      <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Order</button>
+    </div>
+  </div>
+</div>
+
+<div id="cartNotification" class="cart-notification" role="status" aria-live="polite"></div>
+
+<script src="availability.js"></script>
+<script src="cart.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

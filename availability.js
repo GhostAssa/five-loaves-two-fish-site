@@ -113,10 +113,10 @@
 
   function applyMenuAvailabilityState() {
     const map = getAvailabilityMap();
-    const cards = document.querySelectorAll('.menu-item');
+    const cards = document.querySelectorAll('.menu-card');
     cards.forEach(card => {
       const title = card.querySelector('h3')?.textContent?.trim();
-      const button = card.querySelector('.add-to-order-btn');
+      const button = card.querySelector('.add-btn');
       if (!title || !button) return;
 
       const available = map[normalizeItemName(title)] !== false;
@@ -184,7 +184,8 @@
   };
 
   document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.menu-item')) {
+    if (document.querySelector('.menu-card')) {
+      applyMenuAvailabilityState();
       syncFromAPI(() => applyMenuAvailabilityState());
     }
 

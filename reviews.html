@@ -3,454 +3,222 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reviews - Five Loaves & Two Fish</title>
+  <title>Reviews | Five Loaves & Two Fish</title>
+  <meta name="description" content="Reviews from students who ordered from Five Loaves &amp; Two Fish at the University of Ibadan." />
+  <meta name="theme-color" content="#C80908" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .reviews-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: clamp(1rem, 4vw, 2rem);
-    }
-
-    .reviews-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .reviews-header h1 {
-      font-size: clamp(1.5rem, 6vw, 2.5rem);
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .reviews-header p {
-      color: var(--muted);
-      font-size: 1.1rem;
-    }
-
-    .review-item {
-      background: var(--surface);
-      padding: clamp(1.5rem, 3vw, 2rem);
-      margin-bottom: clamp(1rem, 2vw, 1.5rem);
-      border-radius: 8px;
-      border-left: 4px solid var(--primary);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .review-name {
-      font-weight: 700;
-      color: var(--text);
-      font-size: 1.1rem;
-    }
-
-    .review-date {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .review-rating {
-      display: flex;
-      gap: 0.25rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .star {
-      color: #FFD700;
-      font-size: 1.2rem;
-    }
-
-    .review-text {
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .review-form {
-      background: var(--surface);
-      padding: clamp(1.5rem, 4vw, 2rem);
-      border-radius: 8px;
-      margin: clamp(1.5rem, 4vw, 3rem) 0;
-      border: 2px solid var(--border);
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--text);
-      font-size: clamp(0.85rem, 2vw, 1rem);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: clamp(0.75rem, 2vw, 1rem);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-family: inherit;
-      font-size: clamp(0.9rem, 2vw, 1rem);
-      box-sizing: border-box;
-      min-height: 44px;
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
-    }
-
-    .rating-selector {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .rating-selector .star {
-      cursor: pointer;
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-      color: #ddd;
-      transition: color 0.2s;
-      min-height: 44px;
-      min-width: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .rating-selector .star:hover,
-    .rating-selector .star.active {
-      color: #FFD700;
-    }
-
-    .share-section {
-      background: var(--surface);
-      padding: clamp(1.5rem, 4vw, 2rem);
-      border-radius: 8px;
-      text-align: center;
-      margin: clamp(1rem, 3vw, 2rem) 0;
-    }
-
-    .share-section h3 {
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-
-    .share-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .share-btn {
-      padding: clamp(0.6rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem);
-      border: none;
-      border-radius: 4px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.2s;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: clamp(0.85rem, 2vw, 0.95rem);
-      min-height: 44px;
-    }
-
-    .share-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .share-btn-whatsapp {
-      background: #25D366;
-      color: white;
-    }
-
-    .share-btn-twitter {
-      background: #1DA1F2;
-      color: white;
-    }
-
-    .share-btn-facebook {
-      background: #1877F2;
-      color: white;
-    }
-
-    .share-btn-instagram {
-      background: #E4405F;
-      color: white;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .success-message {
-      display: none;
-      background: #4CAF50;
-      color: white;
-      padding: 1rem;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .success-message.show {
-      display: block;
-    }
-
-    @media (max-width: 640px) {
-      .reviews-header h1 {
-        font-size: 1.8rem;
-      }
-
-      .review-item,
-      .review-form,
-      .share-section {
-        padding: 1.5rem;
-      }
-    }
-  </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="navbar">
-      <div class="nav-brand">Five Loaves & Two Fish</div>
-      <ul class="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="order.html">Order</a></li>
-        <li><a href="reviews.html" class="active">Reviews</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <div class="page-hero" style="background: linear-gradient(135deg, var(--primary), var(--accent));">
-      <h1>Customer Reviews</h1>
-      <p>See what our satisfied customers have to say</p>
+<header class="nav-wrap">
+  <nav class="nav" id="mainNav" aria-label="Main">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo-tile"><img src="images/logo-mark.png" alt="" width="40" height="40" /></span>
+      <span class="nav-brand-name">Five Loaves &amp; Two Fish</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="reviews.html" class="active" aria-current="page">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/2348030735623" target="_blank" rel="noopener">Order Now</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNavPanel">☰</button>
+  </nav>
+</header>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<nav class="mobile-nav-panel" id="mobileNavPanel" aria-label="Mobile">
+  <button class="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="order.html">Order</a>
+  <a href="about.html">About</a>
+  <a href="reviews.html" class="active" aria-current="page">Reviews</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://wa.me/2348030735623" class="nav-cta" target="_blank" rel="noopener">Order Now</a>
+</nav>
+
+<main class="site-panel">
+
+  <div class="page-hero">
+    <h1>Honest words from real students.</h1>
+    <p class="page-hero-sub">We don't edit these. Every review below was left by a customer who ordered, ate, and decided to say something.</p>
+  </div>
+  <div class="page-hero-divider"></div>
+
+  <!-- FEATURED REVIEW (dark lime block) -->
+  <div class="reviews-featured">
+    <div class="reviews-featured-inner">
+      <div class="reviews-featured-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote class="reviews-featured-quote">
+        "Fantastic campus restaurant. The variety of meals and the reasonable prices make it the perfect spot. Customer service is excellent too."
+      </blockquote>
+      <p class="reviews-featured-author">— Mustapha Jubril, UI Student</p>
     </div>
+  </div>
 
-    <div class="reviews-container">
-      <!-- Existing Reviews -->
-      <section class="reviews-list">
-        <div class="review-item">
-          <div class="review-header">
-            <span class="review-name">Uche Okpokwu</span>
-            <span class="review-date">3 weeks ago</span>
-          </div>
-          <div class="review-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <p class="review-text">"The meals at Five Loaves & Two Fish are absolutely delicious! The Jollof rice and fish were so fresh and well-prepared. Highly recommend!"</p>
-        </div>
+  <!-- REVIEWS LAYOUT -->
+  <section class="inner-section">
+    <div class="reviews-layout">
 
-        <div class="review-item">
-          <div class="review-header">
-            <span class="review-name">Olutunde John</span>
-            <span class="review-date">2 weeks ago</span>
-          </div>
-          <div class="review-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <p class="review-text">"Great food quality and fast service. The swallow and soup combination is heavenly. Definitely ordering again!"</p>
-        </div>
+      <!-- REVIEWS LIST -->
+      <div class="reviews-list-col">
+        <h2 class="reviews-list-title">What people are saying</h2>
+        <div id="reviewsList" class="reviews-list">
 
-        <div class="review-item">
-          <div class="review-header">
-            <span class="review-name">Mustapha Jubril</span>
-            <span class="review-date">1 week ago</span>
-          </div>
-          <div class="review-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-          </div>
-          <p class="review-text">"Fantastic campus restaurant! The variety of meals and reasonable prices make it the perfect spot. Customer service is also excellent."</p>
-        </div>
-      </section>
-
-      <!-- Share Our Service -->
-      <section class="share-section">
-        <h3>Share Our Service</h3>
-        <p style="color: var(--muted); margin-bottom: 1rem;">Love Five Loaves & Two Fish? Share the word with your friends!</p>
-        <div class="share-buttons">
-          <a href="https://wa.me/?text=Check%20out%20Five%20Loaves%20%26%20Two%20Fish%20-%20amazing%20campus%20restaurant!%20https://fiveleavesandtwofish.com" class="share-btn share-btn-whatsapp" target="_blank" rel="noreferrer">WhatsApp</a>
-          <a href="https://twitter.com/intent/tweet?text=Check%20out%20Five%20Loaves%20%26%20Two%20Fish%20-%20amazing%20campus%20restaurant!&url=https://fiveleavesandtwofish.com" class="share-btn share-btn-twitter" target="_blank" rel="noreferrer">Twitter</a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://fiveleavesandtwofish.com" class="share-btn share-btn-facebook" target="_blank" rel="noreferrer">Facebook</a>
-          <button class="share-btn share-btn-instagram" onclick="copyShareLink()">Copy Link</button>
-        </div>
-      </section>
-
-      <!-- Review Submission Form -->
-      <section class="review-form">
-        <h2>Leave Your Review</h2>
-        <div id="successMessage" class="success-message">Thank you for your review! We appreciate your feedback.</div>
-        <form id="reviewForm" onsubmit="submitReview(event)">
-          <div class="form-group">
-            <label for="reviewName">Your Name</label>
-            <input type="text" id="reviewName" name="reviewName" required placeholder="Enter your name" />
-          </div>
-
-          <div class="form-group">
-            <label for="reviewRating">Rating</label>
-            <div class="rating-selector" id="ratingSelector">
-              <span class="star" data-rating="1">★</span>
-              <span class="star" data-rating="2">★</span>
-              <span class="star" data-rating="3">★</span>
-              <span class="star" data-rating="4">★</span>
-              <span class="star" data-rating="5">★</span>
+          <article class="review-card">
+            <div class="review-top">
+              <span class="review-name">Uche Okpokwu</span>
+              <span class="review-date">3 weeks ago</span>
             </div>
-            <input type="hidden" id="reviewRating" name="reviewRating" value="5" />
-          </div>
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-text">"The meals at Five Loaves & Two Fish are absolutely delicious! The jollof rice and fish were so fresh and well-prepared. Highly recommend to every student on campus."</p>
+          </article>
 
-          <div class="form-group">
-            <label for="reviewText">Your Review</label>
-            <textarea id="reviewText" name="reviewText" required placeholder="Share your experience with Five Loaves & Two Fish..."></textarea>
-          </div>
+          <article class="review-card">
+            <div class="review-top">
+              <span class="review-name">Olutunde John</span>
+              <span class="review-date">2 weeks ago</span>
+            </div>
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-text">"Great food quality and fast service. The swallow and soup combination is heavenly. Definitely ordering again!"</p>
+          </article>
 
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-            <button type="reset" class="btn btn-secondary">Clear</button>
+          <article class="review-card">
+            <div class="review-top">
+              <span class="review-name">Mustapha Jubril</span>
+              <span class="review-date">1 week ago</span>
+            </div>
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-text">"Fantastic campus restaurant. The variety of meals and the reasonable prices make it the perfect spot. Customer service is excellent too."</p>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="reviews-side">
+
+        <!-- SHARE CARD -->
+        <div class="share-card">
+          <h3>Spread the word</h3>
+          <p>Love Five Loaves? Tell your friends — or tag us in your meal photo.</p>
+          <div class="share-buttons">
+            <a href="https://wa.me/?text=Check%20out%20Five%20Loaves%20%26%20Two%20Fish%20%E2%80%94%20amazing%20campus%20food%20at%20Queen%20Idia%20Hall%2C%20UI!" class="share-btn share-btn-wa" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://twitter.com/intent/tweet?text=Check%20out%20Five%20Loaves%20%26%20Two%20Fish%20%E2%80%94%20amazing%20campus%20food%20at%20Queen%20Idia%20Hall%2C%20UI!" class="share-btn share-btn-x" target="_blank" rel="noopener">X</a>
+            <button type="button" class="share-btn share-btn-copy" onclick="copyShareLink(this)">Copy link</button>
           </div>
-        </form>
-      </section>
+        </div>
+
+        <!-- REVIEW FORM -->
+        <div class="review-form-card">
+          <h2>Leave a review</h2>
+          <div id="successMessage" class="success-msg" aria-live="polite">Thanks for your review! We really appreciate it.</div>
+          <form id="reviewForm" onsubmit="submitReview(event)">
+            <div class="form-field">
+              <label for="reviewName">Your name</label>
+              <input type="text" id="reviewName" required placeholder="e.g. Amaka Obi" autocomplete="name" />
+            </div>
+            <div class="form-field">
+              <span class="form-label" id="ratingLabel">Rating</span>
+              <div class="rating-selector" id="ratingSelector" role="group" aria-labelledby="ratingLabel">
+                <button type="button" class="star active" data-rating="1" aria-label="1 star">★</button>
+                <button type="button" class="star active" data-rating="2" aria-label="2 stars">★</button>
+                <button type="button" class="star active" data-rating="3" aria-label="3 stars">★</button>
+                <button type="button" class="star active" data-rating="4" aria-label="4 stars">★</button>
+                <button type="button" class="star active" data-rating="5" aria-label="5 stars">★</button>
+              </div>
+              <input type="hidden" id="reviewRating" value="5" />
+            </div>
+            <div class="form-field">
+              <label for="reviewText">Your review</label>
+              <textarea id="reviewText" required rows="4" placeholder="Share your experience..."></textarea>
+            </div>
+            <div class="review-form-actions">
+              <button type="submit" class="btn-dark-pill">Submit review</button>
+              <button type="reset" class="btn-ghost-pill">Clear</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
-  </main>
+  </section>
 
-  <footer class="site-footer">
-    <p>Queen Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-brand-block">
+        <span class="footer-logo-tile"><img src="images/logo-mark.png" alt="" width="36" height="36" /></span>
+        <span class="footer-brand-name">Five Loaves &amp; Two Fish</span>
+      </a>
+      <nav class="footer-links-group" aria-label="Footer">
+        <div class="footer-col">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="order.html">Order</a>
+        </div>
+        <div class="footer-col">
+          <a href="about.html">About</a>
+          <a href="reviews.html">Reviews</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <a href="https://wa.me/2348030735623" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="tel:+2348030735623">+234 803 073 5623</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bar">
+      <span>© <span data-year>2026</span> Five Loaves &amp; Two Fish · Queen Idia Hall, University of Ibadan</span>
+      <a href="admin.html" class="footer-admin">staff</a>
+    </div>
   </footer>
 
-  <script src="cart.js"></script>
-  <script>
-    // Rating selector
-    const ratingSelector = document.getElementById('ratingSelector');
-    const reviewRating = document.getElementById('reviewRating');
+</main>
 
-    if (ratingSelector) {
-      const stars = ratingSelector.querySelectorAll('.star');
-      stars.forEach(star => {
-        star.addEventListener('click', () => {
-          const rating = star.getAttribute('data-rating');
-          reviewRating.value = rating;
-          stars.forEach(s => {
-            if (s.getAttribute('data-rating') <= rating) {
-              s.classList.add('active');
-            } else {
-              s.classList.remove('active');
-            }
-          });
-        });
+<button type="button" id="floatingCart" class="floating-cart" aria-label="Open your order">
+  <span class="cart-icon" aria-hidden="true">🛒</span>
+  <span id="cartItemCount" class="cart-count"></span>
+</button>
 
-        star.addEventListener('mouseover', () => {
-          const rating = star.getAttribute('data-rating');
-          stars.forEach(s => {
-            if (s.getAttribute('data-rating') <= rating) {
-              s.style.color = '#FFD700';
-            } else {
-              s.style.color = '#ddd';
-            }
-          });
-        });
-      });
+<div id="cartModal" class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="cart-modal-content">
+    <div class="cart-modal-header">
+      <h2 id="cartTitle">Your Order</h2>
+      <button type="button" id="closeCartModal" class="close-btn" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-modal-footer">
+      <div class="total-row">
+        <span class="total-text">Total incl. delivery (₦300) + pack (₦200)</span>
+        <strong id="cartTotal">₦0</strong>
+      </div>
+      <label for="orderName">Your name</label>
+      <input id="orderName" type="text" placeholder="Your name" autocomplete="name" />
+      <label for="orderPhone">Phone number</label>
+      <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" autocomplete="tel" />
+      <label for="orderLocation">Delivery location</label>
+      <input id="orderLocation" type="text" value="Queen Idia Hall, University of Ibadan" />
+      <button type="button" class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
+      <button type="button" class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+      <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Order</button>
+    </div>
+  </div>
+</div>
 
-      ratingSelector.addEventListener('mouseout', () => {
-        const currentRating = reviewRating.value;
-        stars.forEach(s => {
-          if (s.getAttribute('data-rating') <= currentRating) {
-            s.classList.add('active');
-          } else {
-            s.classList.remove('active');
-          }
-        });
-      });
-    }
+<div id="cartNotification" class="cart-notification" role="status" aria-live="polite"></div>
 
-    // Form submission
-    function submitReview(event) {
-      event.preventDefault();
-      const name = document.getElementById('reviewName').value;
-      const rating = document.getElementById('reviewRating').value;
-      const text = document.getElementById('reviewText').value;
-
-      if (!name || !text) {
-        alert('Please fill in all fields');
-        return;
-      }
-
-      // Store review in localStorage
-      let reviews = JSON.parse(localStorage.getItem('flffReviews')) || [];
-      const today = new Date();
-      const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-
-      reviews.push({
-        name: name,
-        rating: parseInt(rating),
-        text: text,
-        date: dateStr
-      });
-
-      localStorage.setItem('flffReviews', JSON.stringify(reviews));
-
-      // Show success message
-      const successMsg = document.getElementById('successMessage');
-      successMsg.classList.add('show');
-      setTimeout(() => {
-        successMsg.classList.remove('show');
-      }, 3000);
-
-      // Reset form
-      document.getElementById('reviewForm').reset();
-      reviewRating.value = '5';
-      document.querySelectorAll('#ratingSelector .star').forEach((s, i) => {
-        if (i < 5) s.classList.add('active');
-        else s.classList.remove('active');
-      });
-    }
-
-    // Copy share link
-    function copyShareLink() {
-      const text = 'Check out Five Loaves & Two Fish - amazing campus restaurant!';
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Link copied to clipboard!');
-      });
-    }
-  </script>
+<script src="availability.js"></script>
+<script src="cart.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

@@ -3,118 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Availability | Five Loaves & Two Fish</title>
+  <title>Staff · Dish Availability | Five Loaves & Two Fish</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#C80908" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html">
-      <img src="images/logo.png" alt="Five Loaves & Two Fish logo" />
-      <span>Five Loaves & Two Fish</span>
+
+<header class="nav-wrap">
+  <nav class="nav" id="mainNav" aria-label="Main">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo-tile"><img src="images/logo-mark.png" alt="" width="40" height="40" /></span>
+      <span class="nav-brand-name">Five Loaves &amp; Two Fish</span>
     </a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="order.html">Order</a>
-      <a href="admin.html" class="active">Admin</a>
-    </nav>
-  </header>
+    <a class="nav-cta nav-cta-always" href="menu.html">View menu</a>
+  </nav>
+</header>
 
-  <main>
-    <section class="page-hero">
-      <div>
-        <span class="eyebrow">Business Admin</span>
-        <h1>Dish Availability Manager</h1>
-        <p>Securely login to manage dish availability and avoid unavailable-item orders.</p>
-      </div>
-      <a class="btn btn-secondary" href="menu.html">View Customer Menu</a>
-    </section>
+<main class="site-panel">
 
-    <section class="admin-panel auth-panel" id="loginPanel">
-      <h2>Admin Login</h2>
-      <p class="note">Only authorized staff can access availability controls.</p>
+  <div class="page-hero">
+    <h1>Dish availability.</h1>
+    <p class="page-hero-sub">Staff only. Sign in to mark dishes as available or sold out — customers see the change on the menu straight away.</p>
+  </div>
+  <div class="page-hero-divider"></div>
+
+  <section class="inner-section">
+    <div class="admin-panel auth-panel" id="loginPanel">
+      <h2>Staff login</h2>
+      <p class="admin-note">Only authorised staff can change availability.</p>
       <form id="loginForm" class="admin-form">
-        <label for="adminUsername">Username</label>
-        <input id="adminUsername" type="text" autocomplete="username" required />
-
-        <label for="adminPassword">Password</label>
-        <div class="password-container">
-          <input id="adminPassword" type="password" autocomplete="current-password" required />
-          <button type="button" id="togglePassword" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+        <div class="form-field">
+          <label for="adminUsername">Username</label>
+          <input id="adminUsername" type="text" autocomplete="username" required />
         </div>
-
-        <button class="btn btn-primary" type="submit">Login</button>
+        <div class="form-field">
+          <label for="adminPassword">Password</label>
+          <div class="password-container">
+            <input id="adminPassword" type="password" autocomplete="current-password" required />
+            <button type="button" id="togglePassword" class="toggle-password" aria-label="Show or hide password">👁️</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Log in</button>
       </form>
       <p id="loginMessage" class="admin-message" aria-live="polite"></p>
-    </section>
+    </div>
 
-    <section class="admin-panel" id="adminControls" style="display: none;">
-      <div class="admin-actions">
-        <button class="btn btn-primary" id="allAvailableBtn">Mark All Available</button>
-        <button class="btn btn-secondary" id="allUnavailableBtn">Mark All Unavailable</button>
-        <button class="btn btn-secondary" id="logoutBtn">Logout</button>
+    <div class="admin-panel" id="adminControls" hidden>
+      <div class="admin-toolbar">
+        <h2>Menu items</h2>
+        <div class="admin-actions">
+          <button type="button" class="btn btn-primary" id="allAvailableBtn">Mark all available</button>
+          <button type="button" class="btn btn-secondary" id="allUnavailableBtn">Mark all sold out</button>
+          <button type="button" class="btn btn-secondary" id="logoutBtn">Log out</button>
+        </div>
       </div>
+      <p class="admin-note">Ticked = available. Changes save automatically.</p>
       <div id="adminItems" class="admin-grid"></div>
-      <p class="note">Changes save automatically in this browser. Use the same device/browser for menu control.</p>
 
       <div class="admin-password-box">
-        <h3>Change Admin Password</h3>
+        <h3>Change admin password</h3>
         <form id="changePasswordForm" class="admin-form">
-          <label for="currentPassword">Current Password</label>
-          <input id="currentPassword" type="password" autocomplete="current-password" required />
-
-          <label for="newPassword">New Password</label>
-          <input id="newPassword" type="password" minlength="8" autocomplete="new-password" required />
-
-          <label for="confirmPassword">Confirm New Password</label>
-          <input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required />
-
-          <button class="btn btn-primary" type="submit">Update Password</button>
+          <div class="form-field">
+            <label for="currentPassword">Current password</label>
+            <input id="currentPassword" type="password" autocomplete="current-password" required />
+          </div>
+          <div class="form-field">
+            <label for="newPassword">New password</label>
+            <input id="newPassword" type="password" minlength="8" autocomplete="new-password" required />
+          </div>
+          <div class="form-field">
+            <label for="confirmPassword">Confirm new password</label>
+            <input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Update password</button>
         </form>
         <p id="passwordMessage" class="admin-message" aria-live="polite"></p>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="site-footer">
-    <p>Queen Idia Hall, University of Ibadan • +2348030735623 • <a href="contact.html">Contact</a></p>
+  <footer class="footer">
+    <div class="footer-bar footer-bar-solo">
+      <span>© <span data-year>2026</span> Five Loaves &amp; Two Fish · Staff area</span>
+      <a href="index.html" class="footer-admin-back">Back to site</a>
+    </div>
   </footer>
 
-  <script src="availability.js"></script>
-  <script>
-    const AUTH_API_URL = '/api/auth';
-    const PASSWORD_API_URL = '/api/password';
-    const SESSION_STORAGE_KEY = 'flffAdminSessionToken';
+</main>
 
-    function setMessage(el, text, isError) {
-      if (!el) return;
-      el.textContent = text;
-      el.classList.toggle('error', Boolean(isError));
-      el.classList.toggle('success', !isError && text.length > 0);
-    }
+<script src="availability.js"></script>
+<script>
+  const AUTH_API_URL = '/api/auth';
+  const PASSWORD_API_URL = '/api/password';
+  const SESSION_STORAGE_KEY = 'flffAdminSessionToken';
 
-    function toggleAdminView(isAuthenticated) {
-      const loginPanel = document.getElementById('loginPanel');
-      const adminControls = document.getElementById('adminControls');
-      loginPanel.style.display = isAuthenticated ? 'none' : 'block';
-      adminControls.style.display = isAuthenticated ? 'block' : 'none';
-    }
+  function setMessage(el, text, isError) {
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('error', Boolean(isError));
+    el.classList.toggle('success', !isError && text.length > 0);
+  }
 
-    function getToken() {
-      return sessionStorage.getItem(SESSION_STORAGE_KEY) || '';
-    }
+  function toggleAdminView(isAuthenticated) {
+    document.getElementById('loginPanel').hidden = isAuthenticated;
+    document.getElementById('adminControls').hidden = !isAuthenticated;
+  }
 
-    window.AdminAuth = {
-      getToken,
-    };
+  function getToken() {
+    return sessionStorage.getItem(SESSION_STORAGE_KEY) || '';
+  }
 
-    async function authenticateSession() {
-      const token = getToken();
-      if (!token) return false;
+  window.AdminAuth = {
+    getToken,
+  };
 
+  async function authenticateSession() {
+    const token = getToken();
+    if (!token) return false;
+
+    try {
       const response = await fetch(AUTH_API_URL, {
         method: 'GET',
         headers: {
@@ -123,100 +137,111 @@
         }
       });
       return response.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  async function initializeAdmin() {
+    if (!window.DishAvailability) return;
+    const isAuthenticated = await authenticateSession();
+    toggleAdminView(isAuthenticated);
+    if (isAuthenticated) {
+      window.DishAvailability.syncFromAPI(() => window.DishAvailability.renderAdminList('adminItems'));
     }
 
-    async function initializeAdmin() {
-      if (!window.DishAvailability) return;
-      const isAuthenticated = await authenticateSession();
-      toggleAdminView(isAuthenticated);
-      if (isAuthenticated) {
-        window.DishAvailability.renderAdminList('adminItems');
-      }
+    document.getElementById('allAvailableBtn')?.addEventListener('click', () => {
+      window.DishAvailability.setAllAvailability(true);
+      window.DishAvailability.renderAdminList('adminItems');
+    });
 
-      document.getElementById('allAvailableBtn')?.addEventListener('click', () => {
-        window.DishAvailability.setAllAvailability(true);
-        window.DishAvailability.renderAdminList('adminItems');
-      });
+    document.getElementById('allUnavailableBtn')?.addEventListener('click', () => {
+      window.DishAvailability.setAllAvailability(false);
+      window.DishAvailability.renderAdminList('adminItems');
+    });
 
-      document.getElementById('allUnavailableBtn')?.addEventListener('click', () => {
-        window.DishAvailability.setAllAvailability(false);
-        window.DishAvailability.renderAdminList('adminItems');
-      });
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      sessionStorage.removeItem(SESSION_STORAGE_KEY);
+      toggleAdminView(false);
+      setMessage(document.getElementById('loginMessage'), 'Logged out successfully.', false);
+    });
 
-      document.getElementById('logoutBtn')?.addEventListener('click', () => {
-        sessionStorage.removeItem(SESSION_STORAGE_KEY);
-        toggleAdminView(false);
-        setMessage(document.getElementById('loginMessage'), 'Logged out successfully.', false);
-      });
+    document.getElementById('loginForm')?.addEventListener('submit', async event => {
+      event.preventDefault();
+      const username = document.getElementById('adminUsername').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const loginMessage = document.getElementById('loginMessage');
 
-      document.getElementById('loginForm')?.addEventListener('submit', async event => {
-        event.preventDefault();
-        const username = document.getElementById('adminUsername').value.trim();
-        const password = document.getElementById('adminPassword').value;
-        const loginMessage = document.getElementById('loginMessage');
-
-        const response = await fetch(AUTH_API_URL, {
+      let response;
+      try {
+        response = await fetch(AUTH_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
         });
+      } catch {
+        setMessage(loginMessage, 'Could not reach the server. Check your connection and try again.', true);
+        return;
+      }
 
-        if (!response.ok) {
-          setMessage(loginMessage, 'Invalid username or password.', true);
-          return;
-        }
+      if (!response.ok) {
+        setMessage(loginMessage, 'Invalid username or password.', true);
+        return;
+      }
 
-        const { token } = await response.json();
-        sessionStorage.setItem(SESSION_STORAGE_KEY, token);
-        toggleAdminView(true);
-        window.DishAvailability.renderAdminList('adminItems');
-        setMessage(loginMessage, '');
-        event.target.reset();
-      });
+      const { token } = await response.json();
+      sessionStorage.setItem(SESSION_STORAGE_KEY, token);
+      toggleAdminView(true);
+      window.DishAvailability.syncFromAPI(() => window.DishAvailability.renderAdminList('adminItems'));
+      setMessage(loginMessage, '');
+      event.target.reset();
+    });
 
-      document.getElementById('changePasswordForm')?.addEventListener('submit', async event => {
-        event.preventDefault();
-        const currentPassword = document.getElementById('currentPassword').value;
-        const newPassword = document.getElementById('newPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        const passwordMessage = document.getElementById('passwordMessage');
+    document.getElementById('changePasswordForm')?.addEventListener('submit', async event => {
+      event.preventDefault();
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const passwordMessage = document.getElementById('passwordMessage');
 
-        if (newPassword.length < 8) {
-          setMessage(passwordMessage, 'New password must be at least 8 characters.', true);
-          return;
-        }
-        if (newPassword !== confirmPassword) {
-          setMessage(passwordMessage, 'New password and confirm password do not match.', true);
-          return;
-        }
+      if (newPassword.length < 8) {
+        setMessage(passwordMessage, 'New password must be at least 8 characters.', true);
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setMessage(passwordMessage, 'New password and confirm password do not match.', true);
+        return;
+      }
 
-        const token = getToken();
-        if (!token) {
-          setMessage(passwordMessage, 'You must be logged in to change the password.', true);
-          return;
-        }
+      const token = getToken();
+      if (!token) {
+        setMessage(passwordMessage, 'You must be logged in to change the password.', true);
+        return;
+      }
 
-        const response = await fetch(PASSWORD_API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({ currentPassword, newPassword })
-        });
+      const response = await fetch(PASSWORD_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ currentPassword, newPassword })
+      }).catch(() => null);
 
-        if (!response.ok) {
-          const payload = await response.json().catch(() => ({}));
-          setMessage(passwordMessage, payload.error || 'Unable to update password.', true);
-          return;
-        }
+      if (!response || !response.ok) {
+        const payload = response ? await response.json().catch(() => ({})) : {};
+        setMessage(passwordMessage, payload.error || 'Unable to update password.', true);
+        return;
+      }
 
-        setMessage(passwordMessage, 'Password updated successfully.', false);
-        event.target.reset();
-      });
-    }
+      setMessage(passwordMessage, 'Password updated successfully.', false);
+      event.target.reset();
+    });
 
-    document.addEventListener('DOMContentLoaded', initializeAdmin);
-  </script>
+    document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeAdmin);
+</script>
 </body>
 </html>

@@ -35,17 +35,19 @@ Ponmo, Plantain, Assorted Meat
 - **Campus Special** (₦1,500) — Jollof Rice × 2, Fried Rice × 1 (or Spag), Plantain, Chicken
 
 ## Repository Structure
-- `index.html` — Home page
-- `menu.html` — Full menu and ordering interface
-- `order.html` — Order workflow and cart instructions
+- `index.html` — Home page (hero, how to order, featured dishes, FAQ, quick order form)
+- `menu.html` — Full menu with sticky category tabs and ordering modals
+- `order.html` — How ordering works + quick WhatsApp order form
 - `about.html` — Restaurant story and values
-- `contact.html` — Contact details and location
+- `contact.html` — Contact details, opening hours and map
 - `reviews.html` — Customer reviews and submission form
-- `admin.html` — Admin availability panel (not linked from customer nav)
-- `styles.css` — Site styling and responsive layout
-- `cart.js` — Cart logic and WhatsApp integration
+- `admin.html` — Staff availability panel (linked only by the faint "staff" link in the footer)
+- `styles.css` — All site styling (tokens → components → pages → breakpoints)
+- `site.js` — Shared page behaviour: mobile nav, menu tabs, FAQ, review form, quick order form
+- `cart.js` — Cart logic and WhatsApp checkout
 - `availability.js` — Dish availability system (admin + menu)
-- `script.js` — Supporting page interactions
+- `api/` — Vercel serverless functions for staff login and availability
+- `favicon.ico`, `images/logo-mark.png`, `images/favicon-32.png`, `images/apple-touch-icon.png` — logo and browser-tab icons (cropped from `images/5.png`)
 
 ## Admin Panel
 The admin panel is **not linked** from the customer-facing navigation. Access it directly at:

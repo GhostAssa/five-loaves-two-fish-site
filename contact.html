@@ -4,95 +4,194 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Five Loaves & Two Fish</title>
+  <meta name="description" content="Find Five Loaves &amp; Two Fish at Queen Idia Hall, University of Ibadan. Call, WhatsApp, or get directions." />
+  <meta name="theme-color" content="#C80908" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="floatingCart" class="floating-cart">
-    <span class="cart-icon">🛒</span>
-    <span id="cartItemCount" class="cart-count"></span>
-  </div>
 
-  <div id="cartModal" class="cart-modal">
-    <div class="cart-modal-content">
-      <div class="cart-modal-header">
-        <h2>Your Order</h2>
-        <button id="closeCartModal" class="close-btn">✕</button>
-      </div>
-      <div id="cartItems" class="cart-items"></div>
-      <div class="cart-modal-footer">
-        <div class="total-row">
-          <strong>Total:</strong>
-          <strong id="cartTotal">₦0</strong>
+<header class="nav-wrap">
+  <nav class="nav" id="mainNav" aria-label="Main">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-logo-tile"><img src="images/logo-mark.png" alt="" width="40" height="40" /></span>
+      <span class="nav-brand-name">Five Loaves &amp; Two Fish</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/2348030735623" target="_blank" rel="noopener">Order Now</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNavPanel">☰</button>
+  </nav>
+</header>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<nav class="mobile-nav-panel" id="mobileNavPanel" aria-label="Mobile">
+  <button class="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="order.html">Order</a>
+  <a href="about.html">About</a>
+  <a href="reviews.html">Reviews</a>
+  <a href="contact.html" class="active" aria-current="page">Contact</a>
+  <a href="https://wa.me/2348030735623" class="nav-cta" target="_blank" rel="noopener">Order Now</a>
+</nav>
+
+<main class="site-panel">
+
+  <div class="page-hero">
+    <h1>Find us at Queen Idia Hall, UI.</h1>
+    <p class="page-hero-sub">Reach us on WhatsApp, call directly, or walk right in. We're on campus and always happy to take your order.</p>
+    <a href="https://wa.me/2348030735623" class="page-hero-cta" target="_blank" rel="noopener">Chat on WhatsApp</a>
+  </div>
+  <div class="page-hero-divider"></div>
+
+  <!-- BIG CONTACT CARDS -->
+  <section class="inner-section">
+    <div class="inner-section-content">
+      <div class="contact-big-row">
+
+        <div class="contact-big-card contact-dark">
+          <div class="contact-card-label">Location</div>
+          <p class="contact-big-value">Queen Idia Hall,<br>University of Ibadan</p>
+          <p class="contact-card-sub">Ibadan, Oyo State, Nigeria</p>
+          <a href="https://www.google.com/maps/search/Queen+Idia+Hall+University+of+Ibadan" target="_blank" rel="noopener" class="contact-card-link">Get directions</a>
         </div>
-        <label for="orderName">Your Name</label>
-        <input id="orderName" type="text" placeholder="Your name" />
-        <label for="orderPhone">Phone Number</label>
-        <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" />
-        <label for="orderLocation">Delivery Location</label>
-        <input id="orderLocation" type="text" placeholder="Queen Idia Hall, University of Ibadan" value="Queen Idia Hall, University of Ibadan" />
-        <button class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
-        <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+
+        <div class="contact-big-card contact-gold">
+          <div class="contact-card-label">Phone &amp; WhatsApp</div>
+          <a href="tel:+2348030735623" class="contact-big-value">+234 803 073 5623</a>
+          <p class="contact-card-sub">Mon – Fri 8am – 8pm · Sat 9am – 6pm</p>
+          <a href="https://wa.me/2348030735623" target="_blank" rel="noopener" class="btn-dark-pill">Chat on WhatsApp</a>
+        </div>
+
       </div>
     </div>
-  </div>
+  </section>
 
-  <header class="site-header">
-    <a class="brand" href="index.html">
-      <img src="images/logo.png" alt="Five Loaves & Two Fish logo" />
-      <span>Five Loaves & Two Fish</span>
-    </a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="order.html">Order</a>
-      <a href="about.html">About</a>
-      <a href="reviews.html">Reviews</a>
-      <a href="contact.html" class="active">Contact</a>
-    </nav>
-  </header>
+  <!-- SOCIAL + HOURS -->
+  <section class="inner-section alt-bg">
+    <div class="inner-section-content">
+      <div class="contact-info-row">
 
-  <main>
-    <section class="page-hero page-contact">
-      <div>
-        <span class="eyebrow">Contact</span>
-        <h1>Find us at Queen Idia Hall, University of Ibadan.</h1>
-        <p>Reach our team quickly by phone, WhatsApp, or direct message.</p>
+        <div class="contact-info-block">
+          <h2>Opening hours</h2>
+          <div class="hours-list">
+            <div class="hours-row"><span>Monday – Friday</span><strong>8:00 am – 8:00 pm</strong></div>
+            <div class="hours-row"><span>Saturday</span><strong>9:00 am – 6:00 pm</strong></div>
+            <div class="hours-row"><span>Sunday</span><strong>Closed</strong></div>
+          </div>
+        </div>
+
+        <div class="contact-info-block">
+          <h2>Follow us</h2>
+          <div class="social-cards">
+            <a href="https://www.instagram.com/five_loaves_twofish/" class="social-card" target="_blank" rel="noopener">
+              <div class="feat-card-cap cap-lavender"></div>
+              <div class="social-card-body">
+                <span class="social-icon" aria-hidden="true">📸</span>
+                <span class="social-label">Instagram</span>
+                <span class="social-handle">@five_loaves_twofish</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
       </div>
-      <a class="btn btn-primary" href="https://wa.me/2348030735623" target="_blank" rel="noreferrer">WhatsApp Us</a>
-    </section>
+    </div>
+  </section>
 
-    <section class="contact-details grid-2">
-      <div>
-        <h2>Where to find us</h2>
-        <p><strong>Location:</strong> Queen Idia Hall, University of Ibadan</p>
-        <p><strong>Phone:</strong> <a href="tel:+2348030735623">+2348030735623</a></p>
-        <p><strong>WhatsApp:</strong> <a href="https://wa.me/2348030735623">Chat now</a></p>
-        <p><strong>Email:</strong> <a href="mailto:five.loaves@campusfood.ng">five.loaves@campusfood.ng</a></p>
+  <!-- MAP -->
+  <section class="inner-section">
+    <div class="inner-section-content">
+      <h2 class="map-title">On the map</h2>
+      <div class="map-card">
+        <iframe
+          title="Queen Idia Hall, University of Ibadan"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.2368235250406!2d3.8959755749487294!3d7.443308394649879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1039b0b45d29eea1%3A0x10838adbf1710efc!2sUniversity%20of%20Ibadan%2C%20Ibadan%2C%20Nigeria!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
-      <div class="social-links">
-        <h2>Quick links</h2>
-        <a class="social" href="#">Instagram</a>
-        <a class="social" href="#">Facebook</a>
-        <a class="social" href="#">X</a>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="map-section">
-      <h2>Map</h2>
-      <div class="map-frame">
-        <iframe title="Queen Idia Hall University of Ibadan" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.2368235250406!2d3.8959755749487294!3d7.443308394649879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1039b0b45d29eea1%3A0x10838adbf1710efc!2sUniversity%20of%20Ibadan%2C%20Ibadan%2C%20Nigeria!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Queen Idia Hall, University of Ibadan • +2348030735623 • <a href="order.html">Order</a></p>
-    <p style="margin-top:0.5rem;"><a href="admin.html" style="font-size:0.4rem;color:rgba(255, 232, 215, 1);text-decoration:none;">staff</a></p>
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-brand-block">
+        <span class="footer-logo-tile"><img src="images/logo-mark.png" alt="" width="36" height="36" /></span>
+        <span class="footer-brand-name">Five Loaves &amp; Two Fish</span>
+      </a>
+      <nav class="footer-links-group" aria-label="Footer">
+        <div class="footer-col">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="order.html">Order</a>
+        </div>
+        <div class="footer-col">
+          <a href="about.html">About</a>
+          <a href="reviews.html">Reviews</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <a href="https://wa.me/2348030735623" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="tel:+2348030735623">+234 803 073 5623</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bar">
+      <span>© <span data-year>2026</span> Five Loaves &amp; Two Fish · Queen Idia Hall, University of Ibadan</span>
+      <a href="admin.html" class="footer-admin">staff</a>
+    </div>
   </footer>
 
-  <script src="cart.js"></script>
+</main>
+
+<button type="button" id="floatingCart" class="floating-cart" aria-label="Open your order">
+  <span class="cart-icon" aria-hidden="true">🛒</span>
+  <span id="cartItemCount" class="cart-count"></span>
+</button>
+
+<div id="cartModal" class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <div class="cart-modal-content">
+    <div class="cart-modal-header">
+      <h2 id="cartTitle">Your Order</h2>
+      <button type="button" id="closeCartModal" class="close-btn" aria-label="Close cart">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-modal-footer">
+      <div class="total-row">
+        <span class="total-text">Total incl. delivery (₦300) + pack (₦200)</span>
+        <strong id="cartTotal">₦0</strong>
+      </div>
+      <label for="orderName">Your name</label>
+      <input id="orderName" type="text" placeholder="Your name" autocomplete="name" />
+      <label for="orderPhone">Phone number</label>
+      <input id="orderPhone" type="tel" placeholder="+2348030xxxxxx" autocomplete="tel" />
+      <label for="orderLocation">Delivery location</label>
+      <input id="orderLocation" type="text" value="Queen Idia Hall, University of Ibadan" />
+      <button type="button" class="btn btn-primary" onclick="submitOrder()">Send Order to WhatsApp</button>
+      <button type="button" class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+      <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Order</button>
+    </div>
+  </div>
+</div>
+
+<div id="cartNotification" class="cart-notification" role="status" aria-live="polite"></div>
+
+<script src="availability.js"></script>
+<script src="cart.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

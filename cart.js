@@ -1,9 +1,30 @@
-let cart = JSON.parse(localStorage.getItem('flffCart')) || [];
+function loadCart() {
+  try {
+    const stored = JSON.parse(localStorage.getItem('flffCart'));
+    return Array.isArray(stored) ? stored : [];
+  } catch {
+    return [];
+  }
+}
+
+let cart = loadCart();
 let selectedMenuItem = null;
 
+function formatNaira(amount) {
+  return `₦${Number(amount).toLocaleString('en-NG')}`;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+
 function saveCart() {
-  localStorage.setItem('flffCart', JSON.stringify(cart));
+  try {
+    localStorage.setItem('flffCart', JSON.stringify(cart));
+  } catch { /* storage blocked — cart still works for this page view */ }
   updateCartUI();
+  const modal = document.getElementById('cartModal');
+  if (modal && modal.classList.contains('open')) renderCartModal();
 }
 
 function addToCart(itemName, price, quantity = 1) {
@@ -31,7 +52,7 @@ function removeFromCart(itemName) {
 function updateQuantity(itemName, quantity) {
   const item = cart.find(item => item.name === itemName);
   if (item) {
-    item.quantity = Math.max(1, quantity);
+    item.quantity = Math.max(1, parseInt(quantity, 10) || 1);
     saveCart();
   }
 }
@@ -70,27 +91,26 @@ function updateCartUI() {
     cartCount.style.display = count > 0 ? 'flex' : 'none';
   }
 
-  if (cartIcon && count === 0) {
-    cartIcon.style.display = 'none';
-  } else if (cartIcon) {
-    cartIcon.style.display = 'flex';
+  if (cartIcon) {
+    cartIcon.style.display = count > 0 ? 'flex' : 'none';
+    cartIcon.setAttribute('aria-label', `Open your order (${count} item${count === 1 ? '' : 's'})`);
   }
 }
 
+let notificationTimer = null;
 function showCartNotification(quantity = 1) {
-  const notification = document.createElement('div');
-  notification.className = 'cart-notification';
-  notification.textContent = `${quantity} item${quantity > 1 ? 's' : ''} added to cart ✓`;
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.classList.add('show');
-  }, 10);
-
-  setTimeout(() => {
-    notification.classList.remove('show');
-    setTimeout(() => notification.remove(), 300);
-  }, 2000);
+  let notification = document.getElementById('cartNotification');
+  if (!notification) {
+    notification = document.createElement('div');
+    notification.id = 'cartNotification';
+    notification.className = 'cart-notification';
+    notification.setAttribute('role', 'status');
+    document.body.appendChild(notification);
+  }
+  notification.textContent = `${quantity} item${quantity > 1 ? 's' : ''} added to your order ✓`;
+  requestAnimationFrame(() => notification.classList.add('show'));
+  clearTimeout(notificationTimer);
+  notificationTimer = setTimeout(() => notification.classList.remove('show'), 2000);
 }
 
 function openQuantitySelector(itemName, price) {
@@ -105,7 +125,7 @@ function openQuantitySelector(itemName, price) {
     qtyInput.value = '1';
   }
   if (modalTitle) {
-    modalTitle.textContent = `Select Quantity - ${itemName}`;
+    modalTitle.textContent = itemName;
   }
   if (modal) {
     modal.classList.add('open');
@@ -155,6 +175,8 @@ function openCart() {
   if (modal) {
     renderCartModal();
     modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    document.getElementById('closeCartModal')?.focus();
   }
 }
 
@@ -162,6 +184,7 @@ function closeCart() {
   const modal = document.getElementById('cartModal');
   if (modal) {
     modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
   }
 }
 
@@ -172,87 +195,90 @@ function renderCartModal() {
   if (!cartItems) return;
 
   if (cart.length === 0) {
-    cartItems.innerHTML = '<p style="text-align: center; color: #999; padding: 2rem;">Your cart is empty</p>';
-    if (cartTotal) cartTotal.textContent = '₦0';
+    cartItems.innerHTML = '<p class="cart-empty">Your order is empty. Add something from the <a href="menu.html">menu</a>.</p>';
+    if (cartTotal) cartTotal.textContent = formatNaira(0);
     return;
   }
 
-  cartItems.innerHTML = cart
-    .map(
-      item => `
-    <div class="cart-item">
-      <div>
-        <strong>${item.name}</strong>
-        <p>₦${item.price}</p>
+  const itemRows = cart
+    .map((item, index) => {
+      const unit = item.price > 0 ? formatNaira(item.price) : 'Price on request';
+      const line = item.price > 0 ? formatNaira(item.price * item.quantity) : '—';
+      return `
+    <div class="cart-item" data-index="${index}">
+      <div class="cart-item-info">
+        <strong>${escapeHTML(item.name)}</strong>
+        <p>${unit}</p>
       </div>
       <div class="cart-item-controls">
-        <button class="qty-btn" onclick="updateQuantity('${item.name.replace(/'/g, "\\'")}', ${item.quantity - 1})">−</button>
-        <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.name.replace(/'/g, "\\'")}', this.value)" />
-        <button class="qty-btn" onclick="updateQuantity('${item.name.replace(/'/g, "\\'")}', ${item.quantity + 1})">+</button>
+        <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease quantity">−</button>
+        <input type="number" value="${item.quantity}" min="1" inputmode="numeric" data-action="set" aria-label="Quantity" />
+        <button type="button" class="qty-btn" data-action="inc" aria-label="Increase quantity">+</button>
       </div>
-      <strong>₦${item.price * item.quantity}</strong>
-      <button class="remove-btn" onclick="removeFromCart('${item.name.replace(/'/g, "\\'")}')">✕</button>
-    </div>
-  `
-    )
+      <strong class="cart-item-total">${line}</strong>
+      <button type="button" class="remove-btn" data-action="remove" aria-label="Remove ${escapeHTML(item.name)}">✕</button>
+    </div>`;
+    })
     .join('');
 
-  const feeRow = `
+  const feeRow = (label, amount) => `
     <div class="cart-item cart-item-fee">
-      <div>
-        <strong>Delivery Fee</strong>
-        <p>Non-editable</p>
+      <div class="cart-item-info">
+        <strong>${label}</strong>
+        <p>Fixed fee</p>
       </div>
-      <strong>₦${getDeliveryFee()}</strong>
-    </div>
-  `;
+      <strong class="cart-item-total">${formatNaira(amount)}</strong>
+    </div>`;
 
-  const foodPackRow = `
-    <div class="cart-item cart-item-fee">
-      <div>
-        <strong>Food Pack</strong>
-        <p>Non-editable</p>
-      </div>
-      <strong>₦${getFoodPackFee()}</strong>
-    </div>
-  `;
-
-  cartItems.innerHTML += feeRow + foodPackRow;
+  cartItems.innerHTML = itemRows + feeRow('Delivery', getDeliveryFee()) + feeRow('Food pack', getFoodPackFee());
 
   if (cartTotal) {
-    cartTotal.textContent = `₦${(getCartTotal() + getDeliveryFee() + getFoodPackFee()).toLocaleString()}`;
+    cartTotal.textContent = formatNaira(getCartTotal() + getDeliveryFee() + getFoodPackFee());
+  }
+}
+
+function handleCartItemEvent(event) {
+  const control = event.target.closest('[data-action]');
+  const row = event.target.closest('.cart-item[data-index]');
+  if (!control || !row) return;
+  const item = cart[Number(row.dataset.index)];
+  if (!item) return;
+  const action = control.dataset.action;
+  if (event.type === 'click') {
+    if (action === 'inc') updateQuantity(item.name, item.quantity + 1);
+    else if (action === 'dec') updateQuantity(item.name, item.quantity - 1);
+    else if (action === 'remove') removeFromCart(item.name);
+  } else if (event.type === 'change' && action === 'set') {
+    updateQuantity(item.name, control.value);
   }
 }
 
 function submitOrder() {
   if (cart.length === 0) {
-    alert('Your cart is empty');
+    alert('Your order is empty.');
     return;
   }
 
-  const location = document.getElementById('orderLocation')?.value || 'Queen Idia Hall, University of Ibadan';
-  const name = document.getElementById('orderName')?.value || 'Customer';
-  const phone = document.getElementById('orderPhone')?.value || 'No phone provided';
+  const field = id => (document.getElementById(id)?.value || '').trim();
+  const location = field('orderLocation') || 'Queen Idia Hall, University of Ibadan';
+  const name = field('orderName') || 'Customer';
+  const phone = field('orderPhone') || 'No phone provided';
 
-  const orderList = cart.map(item => `- ${item.quantity}x ${item.name} (₦${item.price * item.quantity})`).join('\n');
+  const orderList = cart
+    .map(item => `- ${item.quantity}x ${item.name} (${item.price > 0 ? formatNaira(item.price * item.quantity) : 'price on request'})`)
+    .join('\n');
   const deliveryFee = getDeliveryFee();
   const foodPackFee = getFoodPackFee();
   const total = getCartTotal() + deliveryFee + foodPackFee;
 
-  const message = `Hello, Five Loaves and Two Fish.\nMy order is:\n${orderList}\n- Delivery Fee (₦${deliveryFee})\n- Food Pack (₦${foodPackFee})\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ₦${total}\n\nCan I have your account details?`;
+  const message = `Hello, Five Loaves and Two Fish.\nMy name is ${name}.\nMy order is:\n${orderList}\n- Delivery Fee (${formatNaira(deliveryFee)})\n- Food Pack (${formatNaira(foodPackFee)})\n\nMy location is ${location}\nMy phone number is ${phone}\nTotal amount is ${formatNaira(total)}\n\nCan I have your account details?`;
 
-  const encoded = encodeURIComponent(message);
-  const phoneNumber = '2348030735623';
+  const whatsappURL = `https://wa.me/2348030735623?text=${encodeURIComponent(message)}`;
 
-  // Open WhatsApp with the order message
-  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encoded}`;
-
-  // Redirect to WhatsApp (simplest and most reliable method)
-  window.location.href = whatsappURL;
-
-  // Clear cart after redirect
+  // Clear before redirecting so the cart is empty if the customer comes back
   clearCart();
   closeCart();
+  window.location.href = whatsappURL;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -276,6 +302,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  const cartItems = document.getElementById('cartItems');
+  if (cartItems) {
+    cartItems.addEventListener('click', handleCartItemEvent);
+    cartItems.addEventListener('change', handleCartItemEvent);
+  }
+
+  // Keep the cart in sync if it changes in another tab
+  window.addEventListener('storage', event => {
+    if (event.key === 'flffCart') {
+      cart = loadCart();
+      updateCartUI();
+      const modal = document.getElementById('cartModal');
+      if (modal && modal.classList.contains('open')) renderCartModal();
+    }
+  });
 });
 
 // Swallow Variant Selector
@@ -576,6 +618,7 @@ function addEggToCart() {
 
 // Package 1 — Ultimate Feast Selector
 function openPackage1Selector() {
+  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Package 1: Ultimate Feast')) return;
   const modal = document.getElementById('package1Modal');
   const overlay = document.getElementById('package1Overlay');
   const qtyInput = document.getElementById('pkg1Qty');
@@ -627,6 +670,7 @@ function addPackage1ToCart() {
 
 // Package 2 — Campus Special Selector
 function openPackage2Selector() {
+  if (window.DishAvailability && !window.DishAvailability.isItemAvailable('Package 2: Campus Special')) return;
   const modal = document.getElementById('package2Modal');
   const overlay = document.getElementById('package2Overlay');
   const qtyInput = document.getElementById('pkg2Qty');
